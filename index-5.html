@@ -1,0 +1,3489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Herbalife Smart Wellness Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --hb-green-900:#0B3B2E;
+  --hb-green-800:#0E4A3A;
+  --hb-green-700:#11734F;
+  --hb-green-600:#168A5E;
+  --hb-green-500:#1FA363;
+  --hb-lime:#C6FF3D;
+  --hb-lime-dim:#9FE02E;
+  --hb-cream:#FBF7EC;
+  --hb-paper:#F3EEE0;
+  --hb-ink:#16201B;
+  --hb-ink-soft:#41504A;
+  --hb-sand:#E2DAC4;
+  --hb-sand-dark:#CFC5A7;
+  --hb-red:#E2543B;
+  --hb-white:#FFFFFF;
+  --r-sm:10px;
+  --r-md:18px;
+  --r-lg:28px;
+  --r-pill:999px;
+  --shadow-card:0 1px 2px rgba(11,59,46,.06),0 8px 24px -8px rgba(11,59,46,.18);
+  --shadow-pop:0 12px 40px -10px rgba(11,59,46,.35);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0;}
+html,body{height:100%;height:100dvh;overflow:hidden;}
+body{
+  background:var(--hb-cream);
+  color:var(--hb-ink);
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.display{
+  font-family:'Fraunces',Georgia,serif;
+  font-weight:600;
+  letter-spacing:-0.01em;
+}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace;font-feature-settings:"tnum";}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;border:none;outline:none;background:none;}
+input{font-family:inherit;}
+
+#app{
+  width:100%;
+  max-width:480px;
+  height:100vh;
+  height:100dvh;
+  margin:0 auto;
+  position:relative;
+  overflow:hidden;
+}
+.page{
+  position:absolute;
+  inset:0;
+  background:var(--hb-cream);
+  display:flex;
+  flex-direction:column;
+  overflow-y:auto;
+  overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  transform:translateX(100%);
+  transition:transform .35s cubic-bezier(.25,.8,.25,1);
+  will-change:transform;
+  pointer-events:none;
+}
+.page.active{transform:translateX(0);pointer-events:auto;}
+.page.exit-left{transform:translateX(-30%);}
+
+/* ===== TOP BAR ===== */
+.topbar{
+  display:flex;align-items:center;gap:10px;
+  padding:18px 20px 14px;
+  background:var(--hb-cream);
+  flex-shrink:0;
+}
+.topbar .back-btn{
+  width:40px;height:40px;border-radius:var(--r-pill);
+  background:var(--hb-white);border:1px solid var(--hb-sand);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  box-shadow:0 1px 4px rgba(11,59,46,.08);
+}
+.topbar .back-btn:active{transform:scale(.92);}
+.topbar .back-btn svg{width:18px;height:18px;}
+.topbar .tb-title{font-size:15px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;color:var(--hb-ink-soft);}
+
+/* ===== HOME PAGE ===== */
+#page-home .brand-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 20px 0;
+  flex-shrink:0;
+}
+#page-home .brand-bar .logo{display:flex;align-items:center;gap:9px;}
+#page-home .brand-bar .logo-icon{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--hb-green-900);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+#page-home .brand-bar .logo-name{font-size:12.5px;font-weight:700;letter-spacing:.01em;}
+#page-home .brand-bar .logo-sub{font-size:9.5px;color:var(--hb-ink-soft);font-family:'IBM Plex Mono';letter-spacing:.06em;text-transform:uppercase;margin-top:-1px;}
+#page-home .brand-bar .profile-btn{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--hb-white);border:1px solid var(--hb-sand);
+  display:flex;align-items:center;justify-content:center;
+}
+
+.hero{
+  position:relative;margin:14px 16px 0;
+  border-radius:var(--r-lg);
+  background:radial-gradient(120% 140% at 90% -10%,rgba(198,255,61,.35),transparent 55%),
+             linear-gradient(155deg,var(--hb-green-900) 0%,var(--hb-green-700) 60%,var(--hb-green-600) 100%);
+  padding:26px 22px 24px;color:var(--hb-cream);overflow:hidden;
+}
+.hero::after{content:"";position:absolute;right:-40px;bottom:-60px;width:200px;height:200px;border-radius:50%;border:1px solid rgba(251,247,236,.10);}
+.hero .eyebrow{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--hb-lime);margin-bottom:12px;
+}
+.hero .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--hb-lime);box-shadow:0 0 0 4px rgba(198,255,61,.18);}
+.hero h1{font-size:25px;line-height:1.1;color:var(--hb-white);max-width:280px;}
+.hero p{font-size:13px;color:rgba(251,247,236,.72);margin-top:8px;max-width:260px;line-height:1.5;}
+.hero .stat-row{display:flex;gap:20px;margin-top:18px;}
+.hero .stat b{display:block;font-family:'Fraunces';font-size:22px;color:var(--hb-lime);}
+.hero .stat span{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:rgba(251,247,236,.55);}
+
+.section-label{
+  display:flex;align-items:baseline;justify-content:space-between;
+  padding:22px 20px 10px;
+  flex-shrink:0;
+}
+.section-label h2{font-size:19px;}
+.section-label .count{font-family:'IBM Plex Mono';font-size:11px;color:var(--hb-ink-soft);letter-spacing:.04em;}
+
+.cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 16px;}
+.cat-card{
+  position:relative;border-radius:var(--r-md);
+  background:var(--hb-white);border:1px solid var(--hb-sand);
+  padding:18px 16px 16px;min-height:152px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  transition:transform .15s ease,box-shadow .15s ease;
+  overflow:hidden;cursor:pointer;
+}
+.cat-card:active{transform:scale(.96);}
+.cat-card .icon-wrap{
+  width:auto;height:92px;
+  margin:-18px -16px 10px -16px;
+  border-radius:var(--r-md) var(--r-md) 0 0;
+  overflow:hidden;
+  background:var(--hb-sand);
+}
+.cat-card .icon-wrap img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;}
+.cat-card .tag{font-family:'IBM Plex Mono';font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--hb-ink-soft);margin-top:2px;}
+.cat-card h3{font-size:17px;margin-top:3px;line-height:1.15;}
+.cat-card .meta{font-size:11.5px;color:var(--hb-ink-soft);margin-top:5px;}
+
+.quote-strip{
+  margin:22px 16px 0;border-radius:var(--r-md);
+  background:var(--hb-paper);border:1px dashed var(--hb-sand-dark);
+  padding:16px 18px;
+  font-family:'Fraunces';font-style:italic;font-size:14.5px;color:var(--hb-green-900);line-height:1.45;
+}
+.quote-strip span{display:block;margin-top:6px;font-family:'IBM Plex Mono';font-style:normal;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--hb-ink-soft);}
+
+.bottom-nav{
+  position:sticky;
+  bottom:0;
+  margin-top:auto;
+  display:flex;justify-content:space-around;
+  background:rgba(251,247,236,.95);backdrop-filter:blur(10px);
+  border-top:1px solid var(--hb-sand);
+  padding:10px 8px calc(18px + env(safe-area-inset-bottom,18px));
+  flex-shrink:0;
+}
+.nav-item{
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  color:var(--hb-ink-soft);font-size:10px;font-weight:600;
+  padding:4px 14px;border-radius:12px;cursor:pointer;
+}
+.nav-item svg{width:21px;height:21px;stroke:var(--hb-ink-soft);fill:none;}
+.nav-item.active{color:var(--hb-green-700);}
+.nav-item.active svg{stroke:var(--hb-green-700);}
+
+/* ===== PLAN PAGE ===== */
+#page-plan{background:var(--hb-cream);}
+.plan-hero{margin:4px 16px 0;padding:4px 4px 8px;}
+.plan-hero .tag-pill{
+  display:inline-block;padding:5px 12px;border-radius:var(--r-pill);
+  background:var(--hb-green-900);color:var(--hb-lime);
+  font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+}
+.plan-hero h1{font-size:24px;margin-top:12px;}
+.plan-hero p{font-size:13px;color:var(--hb-ink-soft);margin-top:8px;line-height:1.5;}
+
+.day-list{padding:14px 16px;display:flex;flex-direction:column;gap:10px;}
+.day-card{
+  display:flex;align-items:center;gap:14px;
+  background:var(--hb-white);border:1px solid var(--hb-sand);
+  border-radius:var(--r-md);padding:14px 16px;
+  transition:transform .15s ease;cursor:pointer;
+}
+.day-card:active{transform:scale(.985);}
+.day-card .day-num{
+  width:64px;height:64px;border-radius:14px;
+  background:var(--hb-paper);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  flex-shrink:0;
+  position:relative;overflow:hidden;
+}
+.day-card .day-num img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;}
+.day-card .day-num b{font-family:'Fraunces';font-size:19px;color:var(--hb-green-800);line-height:1;}
+.day-card .day-num span{font-family:'IBM Plex Mono';font-size:8px;text-transform:uppercase;color:var(--hb-ink-soft);margin-top:1px;}
+.day-card .day-num .num-badge{
+  position:absolute;left:0;right:0;bottom:0;
+  background:linear-gradient(0deg,rgba(11,59,46,.82),rgba(11,59,46,0));
+  color:var(--hb-cream);
+  font-family:'IBM Plex Mono';font-size:8px;letter-spacing:.03em;text-transform:uppercase;
+  text-align:center;padding:7px 2px 3px;
+}
+.day-card .info{flex:1;min-width:0;}
+.day-card .info h4{font-size:14.5px;font-weight:600;}
+.day-card .info .sub{font-size:12px;color:var(--hb-ink-soft);margin-top:3px;display:flex;gap:8px;align-items:center;}
+.day-card .info .sub svg{width:12px;height:12px;}
+.day-card .status{width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--hb-paper);}
+.day-card.done .status{background:var(--hb-green-500);}
+.day-card.done .status svg{stroke:var(--hb-white);}
+.day-card .status svg{width:14px;height:14px;stroke:var(--hb-ink-soft);}
+
+/* ===== DAY DETAIL PAGE ===== */
+.daydetail-hero{
+  margin:6px 16px 0;border-radius:var(--r-lg);overflow:hidden;
+  background:linear-gradient(160deg,var(--hb-green-800),var(--hb-green-600));
+  padding:22px 20px 20px;color:var(--hb-cream);
+}
+.daydetail-hero .small{font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--hb-lime);}
+.daydetail-hero h1{color:var(--hb-white);font-size:21px;margin-top:8px;}
+.dd-stats{display:flex;margin-top:16px;border-top:1px solid rgba(251,247,236,.15);padding-top:13px;}
+.dd-stats .s{flex:1;border-right:1px solid rgba(251,247,236,.15);}
+.dd-stats .s:last-child{border-right:none;}
+.dd-stats .s b{display:block;font-family:'Fraunces';font-size:18px;color:var(--hb-white);}
+.dd-stats .s span{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:rgba(251,247,236,.6);}
+
+.dd-section-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 16px 6px;
+}
+.dd-section-head h3{font-size:14px;}
+.dd-section-head .hint{font-family:'IBM Plex Mono';font-size:10px;color:var(--hb-ink-soft);letter-spacing:.03em;}
+
+.chapter-list{padding:8px 16px 4px;display:flex;flex-direction:column;gap:8px;}
+.tip-card{
+  margin:8px 16px 4px;padding:16px 16px;border-radius:14px;
+  background:var(--hb-paper);border:1px dashed var(--hb-sand-dark);
+  font-size:12.5px;color:var(--hb-ink-soft);line-height:1.55;
+}
+.tip-card b{color:var(--hb-green-800);}
+.fav-row{
+  display:flex;align-items:center;gap:10px;
+  background:var(--hb-white);border:1px solid var(--hb-sand);border-radius:14px;
+  padding:13px 14px;margin:0 16px;cursor:pointer;
+}
+.fav-row .star{width:20px;height:20px;flex-shrink:0;stroke:var(--hb-ink-soft);fill:none;}
+.fav-row.is-fav .star{stroke:var(--hb-lime-dim);fill:var(--hb-lime);}
+.fav-row .txt{font-size:13.5px;font-weight:600;color:var(--hb-ink);flex:1;}
+.fav-row:active{transform:scale(.98);}
+
+.btn-ghost{
+  margin:8px 16px 4px;padding:13px;border-radius:var(--r-pill);
+  background:var(--hb-white);border:1px solid var(--hb-sand-dark);
+  color:var(--hb-green-800);font-weight:600;font-size:13.5px;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+}
+.btn-ghost:active{transform:scale(.98);}
+.btn-ghost svg{width:15px;height:15px;}
+
+.start-bar{
+  padding:14px 16px calc(26px + env(safe-area-inset-bottom,26px));
+  background:linear-gradient(0deg,var(--hb-cream) 70%,rgba(251,247,236,0));
+  flex-shrink:0;
+  margin-top:auto;
+}
+.btn-primary{
+  width:100%;padding:16px;border:none;border-radius:var(--r-pill);
+  background:var(--hb-ink);color:var(--hb-lime);
+  font-family:'Inter';font-weight:700;font-size:15px;letter-spacing:.01em;
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  box-shadow:var(--shadow-pop);cursor:pointer;
+}
+.btn-primary:active{transform:scale(.98);}
+.btn-primary svg{width:17px;height:17px;fill:var(--hb-lime);}
+
+/* ===== PLAYER PAGE ===== */
+#page-player{background:var(--hb-ink);color:var(--hb-cream);}
+.player-top{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 16px 8px;flex-shrink:0;
+}
+.player-top-right{display:flex;align-items:center;gap:8px;}
+.player-top .icon-btn.is-active{background:var(--hb-lime);}
+.player-top .icon-btn.is-active svg{stroke:var(--hb-green-900);}
+.player-top .icon-btn{
+  width:38px;height:38px;border-radius:50%;
+  background:rgba(251,247,236,.08);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+}
+.player-top .icon-btn:active{transform:scale(.9);}
+.player-top .icon-btn svg{width:16px;height:16px;stroke:var(--hb-cream);}
+.day-chip{font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:rgba(251,247,236,.55);}
+
+/* video box */
+.video-box{
+  margin:10px 16px 0;border-radius:22px;overflow:hidden;
+  background:#000;position:relative;flex-shrink:0;
+  aspect-ratio:16/9;
+}
+.video-box iframe{width:100%;height:100%;border:0;display:block;}
+
+/* progress (synced to actual video time) */
+.vid-progress-wrap{padding:12px 16px 2px;flex-shrink:0;}
+.vid-progress-track{
+  position:relative;height:6px;border-radius:4px;
+  background:rgba(251,247,236,.14);cursor:pointer;
+}
+.vid-progress-fill{
+  position:absolute;left:0;top:0;bottom:0;border-radius:4px;
+  background:var(--hb-lime);width:0%;
+}
+.vid-time-row{display:flex;justify-content:space-between;margin-top:7px;}
+.vid-time-row span{font-family:'IBM Plex Mono';font-size:11px;color:rgba(251,247,236,.5);}
+
+/* chapter status card */
+.now-card{
+  margin:14px 16px 0;padding:18px 18px 16px;border-radius:20px;
+  background:var(--hb-green-900);text-align:center;flex-shrink:0;
+}
+.now-card .eyebrow{
+  font-family:'IBM Plex Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--hb-lime);display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.now-card h2{font-size:19px;color:var(--hb-white);margin-top:8px;line-height:1.25;}
+.now-card .next-line{
+  margin-top:7px;font-family:'IBM Plex Mono';font-size:11px;color:rgba(251,247,236,.5);
+  display:flex;align-items:center;gap:5px;justify-content:center;
+}
+.now-card .next-line svg{width:10px;height:10px;stroke:rgba(251,247,236,.4);}
+
+/* controls */
+.player-controls{
+  padding:16px 20px calc(22px + env(safe-area-inset-bottom,22px));
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  flex-shrink:0;flex-wrap:wrap;
+}
+.ctrl-btn{
+  height:52px;min-width:52px;padding:0 16px;border-radius:var(--r-pill);border:none;
+  background:rgba(251,247,236,.08);
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  cursor:pointer;
+}
+.ctrl-btn svg{width:19px;height:19px;stroke:var(--hb-cream);fill:none;flex-shrink:0;}
+.ctrl-btn .lbl{font-family:'IBM Plex Mono';font-size:11px;color:var(--hb-cream);white-space:nowrap;}
+.ctrl-btn.playpause{width:60px;min-width:60px;height:60px;background:var(--hb-lime);padding:0;}
+.ctrl-btn.playpause svg{width:22px;height:22px;fill:var(--hb-ink);stroke:none;}
+.ctrl-btn:active{transform:scale(.92);}
+.ctrl-btn.speed-btn{background:rgba(198,255,61,.12);}
+.ctrl-btn.speed-btn .lbl{color:var(--hb-lime);font-weight:700;}
+.ctrl-btn:disabled{opacity:.3;pointer-events:none;}
+
+/* ===== COMPLETE PAGE ===== */
+#page-complete{background:var(--hb-ink);color:var(--hb-cream);}
+.complete-wrap{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:40px 30px;
+}
+.complete-badge{
+  width:90px;height:90px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,var(--hb-lime),var(--hb-green-500));
+  display:flex;align-items:center;justify-content:center;margin-bottom:22px;
+  box-shadow:0 0 0 12px rgba(198,255,61,.07);
+}
+.complete-badge svg{width:36px;height:36px;stroke:var(--hb-ink);stroke-width:3;}
+.complete-wrap h1{color:var(--hb-white);font-size:26px;}
+.complete-wrap p{color:rgba(251,247,236,.55);font-size:13px;margin-top:10px;line-height:1.5;max-width:280px;}
+.complete-stats{display:flex;gap:30px;margin:26px 0;}
+.complete-stats div b{display:block;font-family:'Fraunces';font-size:22px;color:var(--hb-lime);}
+.complete-stats div span{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:rgba(251,247,236,.45);}
+.complete-wrap.animate-in .complete-badge{animation:cbPop .6s cubic-bezier(.34,1.56,.64,1) both;}
+.complete-wrap.animate-in h1{animation:cbFadeUp .45s ease both;animation-delay:.12s;}
+.complete-wrap.animate-in p{animation:cbFadeUp .45s ease both;animation-delay:.2s;}
+.complete-wrap.animate-in .complete-stats{animation:cbFadeUp .45s ease both;animation-delay:.28s;}
+.complete-wrap.animate-in .btn-primary{animation:cbFadeUp .45s ease both;animation-delay:.36s;}
+@keyframes cbPop{0%{transform:scale(.35);opacity:0;box-shadow:0 0 0 0 rgba(198,255,61,0);}55%{transform:scale(1.14);opacity:1;}100%{transform:scale(1);opacity:1;box-shadow:0 0 0 12px rgba(198,255,61,.07);}}
+@keyframes cbFadeUp{0%{opacity:0;transform:translateY(14px);}100%{opacity:1;transform:translateY(0);}}
+
+/* ===== DAY CARD FAVORITE STAR ===== */
+.day-card .fav-star{
+  width:30px;height:30px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.day-card .fav-star svg{width:16px;height:16px;stroke:var(--hb-ink-soft);fill:none;}
+.day-card .fav-star.is-fav svg{stroke:var(--hb-lime-dim);fill:var(--hb-lime);}
+
+/* ===== PROGRESS PAGE ===== */
+.stat-card-row{display:flex;gap:10px;padding:6px 16px 4px;}
+.stat-card{
+  flex:1;background:var(--hb-white);border:1px solid var(--hb-sand);border-radius:16px;
+  padding:14px 10px;text-align:center;
+}
+.stat-card b{display:block;font-family:'Fraunces';font-size:21px;color:var(--hb-green-800);}
+.stat-card span{font-size:9.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--hb-ink-soft);}
+
+.week-grid{display:flex;justify-content:space-between;padding:16px 16px 4px;gap:6px;}
+.week-day{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;}
+.week-day .lbl{font-family:'IBM Plex Mono';font-size:9px;color:var(--hb-ink-soft);text-transform:uppercase;}
+.week-day .dot{
+  width:34px;height:34px;border-radius:50%;background:var(--hb-paper);
+  border:1px solid var(--hb-sand);display:flex;align-items:center;justify-content:center;
+}
+.week-day.done .dot{background:var(--hb-green-500);border-color:var(--hb-green-500);}
+.week-day.done .dot svg{stroke:var(--hb-white);width:14px;height:14px;}
+.week-day.today .lbl{color:var(--hb-green-700);font-weight:700;}
+
+/* ---- Per-plan progress bar chart ---- */
+.plan-progress-list{padding:6px 16px 4px;display:flex;flex-direction:column;gap:10px;}
+.plan-prog-row{
+  background:var(--hb-white);border:1px solid var(--hb-sand);border-radius:14px;
+  padding:13px 14px;cursor:pointer;transition:transform .15s ease;
+}
+.plan-prog-row:active{transform:scale(.985);}
+.plan-prog-row .top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px;}
+.plan-prog-row .nm{font-size:13.5px;font-weight:600;}
+.plan-prog-row .pct{font-family:'IBM Plex Mono';font-size:12px;color:var(--hb-green-700);font-weight:600;}
+.plan-prog-row .bar-track{height:8px;border-radius:5px;background:var(--hb-paper);overflow:hidden;}
+.plan-prog-row .bar-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--hb-green-600),var(--hb-lime));width:0%;transition:width .4s ease;}
+.plan-prog-row .meta{font-family:'IBM Plex Mono';font-size:10px;color:var(--hb-ink-soft);margin-top:7px;}
+
+/* ---- Trend line chart ---- */
+.trend-card{
+  margin:6px 16px 0;padding:16px 16px 12px;border-radius:var(--r-md);
+  background:var(--hb-white);border:1px solid var(--hb-sand);
+}
+.trend-card .hd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px;}
+.trend-card .hd h3{font-size:13.5px;}
+.trend-card .hd span{font-family:'IBM Plex Mono';font-size:10px;color:var(--hb-ink-soft);}
+.trend-card svg.trend-svg{width:100%;height:64px;display:block;}
+.trend-card .x-labels{display:flex;justify-content:space-between;margin-top:4px;}
+.trend-card .x-labels span{font-family:'IBM Plex Mono';font-size:8.5px;color:var(--hb-ink-soft);}
+
+/* ---- Report modal ---- */
+.report-overlay{
+  position:fixed;inset:0;z-index:600;background:rgba(11,20,17,.55);
+  display:none;align-items:center;justify-content:center;padding:20px;
+}
+.report-overlay.show{display:flex;}
+.report-sheet{
+  width:100%;max-width:380px;max-height:90vh;overflow-y:auto;
+  background:var(--hb-cream);border-radius:var(--r-lg);box-shadow:var(--shadow-pop);
+  -webkit-overflow-scrolling:touch;
+}
+.report-card{
+  margin:14px;border-radius:var(--r-lg);overflow:hidden;
+  background:linear-gradient(160deg,var(--hb-green-900) 0%,var(--hb-green-700) 55%,var(--hb-green-600) 100%);
+  color:var(--hb-cream);padding:26px 22px 22px;
+}
+.report-card .rc-brand{display:flex;align-items:center;gap:8px;font-family:'IBM Plex Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--hb-lime);margin-bottom:18px;}
+.report-card .rc-brand .dot{width:6px;height:6px;border-radius:50%;background:var(--hb-lime);}
+.report-card h2{color:var(--hb-white);font-size:21px;line-height:1.2;}
+.report-card .rc-sub{font-size:11.5px;color:rgba(251,247,236,.6);margin-top:4px;}
+.report-card .rc-pct-wrap{display:flex;align-items:baseline;gap:8px;margin-top:20px;}
+.report-card .rc-pct{font-family:'Fraunces';font-size:42px;color:var(--hb-lime);line-height:1;}
+.report-card .rc-pct-lbl{font-size:11px;color:rgba(251,247,236,.6);text-transform:uppercase;letter-spacing:.05em;}
+.report-card .rc-bar-track{height:9px;border-radius:6px;background:rgba(251,247,236,.15);margin-top:14px;overflow:hidden;}
+.report-card .rc-bar-fill{height:100%;border-radius:6px;background:var(--hb-lime);}
+.report-card .rc-stats{display:flex;margin-top:20px;border-top:1px solid rgba(251,247,236,.15);padding-top:14px;}
+.report-card .rc-stats .s{flex:1;border-right:1px solid rgba(251,247,236,.15);}
+.report-card .rc-stats .s:last-child{border-right:none;}
+.report-card .rc-stats .s b{display:block;font-family:'Fraunces';font-size:18px;color:var(--hb-white);}
+.report-card .rc-stats .s span{font-size:9.5px;text-transform:uppercase;letter-spacing:.05em;color:rgba(251,247,236,.55);}
+.report-card .rc-foot{margin-top:18px;font-family:'IBM Plex Mono';font-size:9.5px;color:rgba(251,247,236,.45);text-align:center;}
+.report-actions{display:flex;gap:10px;padding:6px 14px 18px;}
+.report-actions button{
+  flex:1;padding:13px;border-radius:var(--r-pill);font-weight:700;font-size:13px;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+}
+.report-actions button svg{width:15px;height:15px;}
+.report-actions .rep-download{background:var(--hb-ink);color:var(--hb-lime);}
+.report-actions .rep-share{background:var(--hb-white);border:1px solid var(--hb-sand-dark);color:var(--hb-green-800);}
+.report-actions button:active{transform:scale(.97);}
+.report-close{
+  position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;
+  background:rgba(251,247,236,.15);display:flex;align-items:center;justify-content:center;
+}
+.report-close svg{width:14px;height:14px;stroke:var(--hb-white);}
+
+.fav-list{padding:6px 16px 4px;display:flex;flex-direction:column;gap:8px;}
+.fav-list-item{
+  display:flex;align-items:center;gap:12px;
+  background:var(--hb-white);border:1px solid var(--hb-sand);border-radius:14px;
+  padding:12px 14px;cursor:pointer;
+}
+.fav-list-item:active{transform:scale(.985);}
+.fav-list-item svg{width:16px;height:16px;stroke:var(--hb-lime-dim);fill:var(--hb-lime);flex-shrink:0;}
+.fav-list-item .nm{font-size:13.5px;font-weight:600;flex:1;}
+.fav-list-item .sub{font-size:10.5px;color:var(--hb-ink-soft);font-family:'IBM Plex Mono';}
+.empty-note{
+  margin:6px 16px;padding:18px 16px;border-radius:14px;
+  border:1px dashed var(--hb-sand-dark);background:var(--hb-paper);
+  text-align:center;font-size:12.5px;color:var(--hb-ink-soft);line-height:1.5;
+}
+
+/* ===== WEIGHT TRACKER PAGE ===== */
+.tracker-card{
+  margin:6px 16px 0;border-radius:var(--r-lg);overflow:hidden;
+  background:linear-gradient(160deg,var(--hb-green-800),var(--hb-green-600));
+  padding:22px 22px 18px;color:var(--hb-cream);
+}
+.tracker-card .small{font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--hb-lime);}
+.tracker-card .row{display:flex;align-items:baseline;gap:8px;margin-top:6px;}
+.tracker-card .count{font-family:'Fraunces';font-size:36px;color:var(--hb-white);}
+.tracker-card .unit{font-size:13px;color:rgba(251,247,236,.65);}
+.tracker-card .delta{font-size:12px;margin-top:4px;color:var(--hb-lime);}
+.tracker-card .delta.up{color:#FFB199;}
+.tracker-card svg.spark{width:100%;height:48px;margin-top:14px;}
+.tracker-input-row{display:flex;gap:10px;padding:14px 16px 4px;}
+.tracker-input-row input{
+  flex:1;padding:13px 14px;border-radius:14px;border:1px solid var(--hb-sand-dark);
+  background:var(--hb-white);font-size:14px;color:var(--hb-ink);
+}
+.tracker-input-row button{
+  padding:13px 18px;border-radius:var(--r-pill);background:var(--hb-ink);
+  color:var(--hb-lime);font-weight:700;font-size:13.5px;
+}
+.tracker-input-row button:active{transform:scale(.97);}
+.tracker-log{padding:10px 16px 4px;display:flex;flex-direction:column;gap:8px;}
+.tracker-row{
+  display:flex;align-items:center;gap:10px;
+  background:var(--hb-white);border:1px solid var(--hb-sand);border-radius:14px;
+  padding:11px 14px;
+}
+.tracker-row .d{font-family:'IBM Plex Mono';font-size:11px;color:var(--hb-ink-soft);min-width:60px;}
+.tracker-row .v{flex:1;font-size:14px;font-weight:600;}
+.tracker-row .del{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--hb-ink-soft);}
+.tracker-row .del svg{width:13px;height:13px;}
+
+/* ===== PROFILE PAGE ===== */
+.profile-hero{display:flex;flex-direction:column;align-items:center;padding:18px 20px 6px;text-align:center;}
+.profile-hero .avatar{
+  width:84px;height:84px;border-radius:50%;background:var(--hb-green-900);
+  display:flex;align-items:center;justify-content:center;margin-bottom:10px;
+  position:relative;overflow:hidden;cursor:pointer;flex-shrink:0;
+}
+.profile-hero .avatar img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;}
+.profile-hero .avatar .cam-badge{
+  position:absolute;right:-2px;bottom:-2px;width:26px;height:26px;border-radius:50%;
+  background:var(--hb-lime);border:2px solid var(--hb-cream);
+  display:flex;align-items:center;justify-content:center;
+}
+.profile-hero .avatar .cam-badge svg{width:12px;height:12px;stroke:var(--hb-green-900);}
+.profile-hero h2{font-size:18px;}
+.profile-hero p{font-size:12px;color:var(--hb-ink-soft);margin-top:3px;}
+.profile-edit-list{display:flex;flex-direction:column;gap:8px;padding:8px 0;}
+.profile-field{
+  background:var(--hb-white);border:1px solid var(--hb-sand);border-radius:14px;
+  padding:11px 14px;margin:0 16px;
+}
+.profile-field .lbl{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--hb-ink-soft);margin-bottom:5px;}
+.profile-field input,.profile-field textarea{
+  width:100%;border:none;background:none;font-size:14px;color:var(--hb-ink);
+  font-family:'Inter';padding:0;resize:none;
+}
+.profile-field textarea{line-height:1.4;}
+.profile-field input::placeholder,.profile-field textarea::placeholder{color:var(--hb-sand-dark);}
+.settings-row{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  background:var(--hb-white);border:1px solid var(--hb-sand);border-radius:14px;
+  padding:13px 14px;margin:0 16px;
+}
+.settings-row .lbl{font-size:13.5px;font-weight:600;}
+.settings-row .sub{font-size:11px;color:var(--hb-ink-soft);margin-top:2px;}
+.settings-list{display:flex;flex-direction:column;gap:8px;padding:8px 0;}
+.goal-stepper{display:flex;align-items:center;gap:10px;}
+.goal-stepper button{
+  width:30px;height:30px;border-radius:50%;background:var(--hb-paper);
+  border:1px solid var(--hb-sand);font-weight:700;font-size:15px;color:var(--hb-green-800);
+}
+.goal-stepper b{font-family:'Fraunces';font-size:16px;min-width:18px;text-align:center;}
+.btn-danger{
+  margin:10px 16px 4px;padding:13px;border-radius:var(--r-pill);
+  background:var(--hb-white);border:1px solid var(--hb-red);
+  color:var(--hb-red);font-weight:600;font-size:13.5px;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+}
+.btn-danger:active{transform:scale(.98);}
+
+/* ===== PERMISSION TOGGLES (Profile page) ===== */
+.perm-toggle{
+  position:relative;width:46px;height:27px;border-radius:var(--r-pill);
+  background:var(--hb-sand-dark);flex-shrink:0;transition:background .2s ease;
+}
+.perm-toggle .knob{
+  position:absolute;top:2px;left:2px;width:23px;height:23px;border-radius:50%;
+  background:var(--hb-white);box-shadow:0 1px 3px rgba(11,59,46,.25);
+  transition:transform .2s ease;
+}
+.perm-toggle.is-on{background:var(--hb-green-600);}
+.perm-toggle.is-on .knob{transform:translateX(19px);}
+.perm-toggle.is-denied{background:var(--hb-red);opacity:.55;}
+.settings-row .perm-icon{
+  width:34px;height:34px;border-radius:10px;flex-shrink:0;
+  background:var(--hb-paper);display:flex;align-items:center;justify-content:center;
+  margin-right:2px;
+}
+.settings-row .perm-icon svg{width:16px;height:16px;stroke:var(--hb-green-800);}
+.settings-row.perm-row{gap:12px;}
+
+/* ===== REST OVERLAY ===== */
+.rest-overlay{
+  position:absolute;inset:0;z-index:50;
+  background:linear-gradient(160deg,var(--hb-green-900) 0%,var(--hb-green-700) 70%,var(--hb-green-600) 100%);
+  display:none;
+  flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:8px 16px;
+  overflow:hidden;
+}
+.rest-overlay.show{display:flex;}
+.rest-overlay .eyebrow{
+  font-family:'IBM Plex Mono';font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--hb-lime);margin-bottom:2px;flex-shrink:0;
+}
+.rest-overlay .ring-wrap{position:relative;width:84px;height:84px;margin:2px 0 4px;flex-shrink:0;}
+.rest-overlay .ring-wrap svg{width:100%;height:100%;transform:rotate(-90deg);}
+.rest-overlay .ring-bg{fill:none;stroke:rgba(251,247,236,.14);stroke-width:6;}
+.rest-overlay .ring-fg{fill:none;stroke:var(--hb-lime);stroke-width:6;stroke-linecap:round;transition:stroke-dashoffset .25s linear;}
+.rest-overlay .ring-num{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces';font-size:19px;color:var(--hb-white);
+}
+.rest-overlay p.sub{font-size:10px;color:rgba(251,247,236,.7);max-width:220px;line-height:1.35;margin-bottom:6px;flex-shrink:0;}
+.rest-adjust-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-shrink:0;}
+.rest-adjust-row button{
+  width:28px;height:28px;border-radius:50%;
+  background:rgba(251,247,236,.1);border:1px solid rgba(251,247,236,.25);
+  color:var(--hb-white);font-family:'Fraunces';font-size:12px;font-weight:600;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.rest-adjust-row button:active{transform:scale(.92);background:rgba(251,247,236,.18);}
+.rest-adjust-row .amt{
+  font-family:'IBM Plex Mono';font-size:9.5px;color:rgba(251,247,236,.6);
+  min-width:46px;text-align:center;letter-spacing:.02em;
+}
+.rest-actions{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;max-width:220px;flex-shrink:0;}
+.rest-skip-btn{
+  width:100%;padding:8px;border-radius:var(--r-pill);
+  background:var(--hb-lime);color:var(--hb-green-900);
+  font-weight:700;font-size:11px;
+  display:flex;align-items:center;justify-content:center;gap:5px;
+}
+.rest-skip-btn:active{transform:scale(.97);}
+.rest-skip-btn svg{width:13px;height:13px;}
+.rest-pause-toggle{
+  font-family:'IBM Plex Mono';font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;
+  color:rgba(251,247,236,.65);text-decoration:underline;text-underline-offset:3px;
+}
+.rest-trigger-btn{
+  display:flex;align-items:center;gap:6px;
+  padding:9px 14px;border-radius:var(--r-pill);
+  background:rgba(251,247,236,.08);border:1px solid rgba(251,247,236,.2);
+  color:var(--hb-ink-soft);font-size:11.5px;font-weight:600;
+}
+
+/* ===== AI CHAT — FLOATING BUTTON ===== */
+.chat-fab{
+  position:fixed;right:18px;bottom:96px;z-index:300;
+  width:56px;height:56px;border-radius:50%;
+  background:var(--hb-ink);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:var(--shadow-pop);
+  cursor:pointer;
+}
+.chat-fab svg{width:24px;height:24px;stroke:var(--hb-lime);}
+.chat-fab:active{transform:scale(.92);}
+.chat-fab .dot-badge{
+  position:absolute;top:6px;right:6px;width:9px;height:9px;border-radius:50%;
+  background:var(--hb-lime);border:2px solid var(--hb-ink);
+}
+#app.has-bottom-nav-page .chat-fab{bottom:158px;}
+
+/* ===== AI CHAT — PAGE ===== */
+#page-chat{background:var(--hb-cream);}
+.chat-header{
+  display:flex;align-items:center;gap:10px;
+  padding:18px 20px 14px;flex-shrink:0;
+}
+.chat-header .back-btn{
+  width:40px;height:40px;border-radius:var(--r-pill);
+  background:var(--hb-white);border:1px solid var(--hb-sand);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  box-shadow:0 1px 4px rgba(11,59,46,.08);
+}
+.chat-header .back-btn:active{transform:scale(.92);}
+.chat-header .back-btn svg{width:18px;height:18px;}
+.chat-header .ttl{flex:1;min-width:0;}
+.chat-header .ttl b{display:block;font-size:15px;font-weight:700;}
+.chat-header .ttl span{font-size:10.5px;color:var(--hb-ink-soft);font-family:'IBM Plex Mono';display:flex;align-items:center;gap:5px;}
+.chat-header .ttl span .live-dot{width:6px;height:6px;border-radius:50%;background:var(--hb-green-500);flex-shrink:0;}
+.chat-header .clear-btn{
+  width:36px;height:36px;border-radius:50%;flex-shrink:0;
+  background:var(--hb-white);border:1px solid var(--hb-sand);
+  display:flex;align-items:center;justify-content:center;
+}
+.chat-header .clear-btn svg{width:15px;height:15px;stroke:var(--hb-ink-soft);}
+.chat-header .clear-btn:active{transform:scale(.92);}
+
+.chat-body{flex:1;padding:6px 16px 10px;display:flex;flex-direction:column;gap:14px;overflow-anchor:none;}
+.chat-msg{display:flex;max-width:88%;}
+.chat-msg.bot{align-self:flex-start;}
+.chat-msg.user{align-self:flex-end;}
+.chat-bubble{
+  padding:11px 14px;border-radius:16px;font-size:13.5px;line-height:1.5;
+  white-space:pre-wrap;word-break:break-word;
+}
+.chat-msg.bot .chat-bubble{
+  background:var(--hb-white);border:1px solid var(--hb-sand);color:var(--hb-ink);
+  border-bottom-left-radius:5px;
+}
+.chat-source-link{
+  display:inline-flex;align-items:center;gap:4px;margin-top:8px;
+  font-family:'IBM Plex Mono';font-size:11px;font-weight:600;
+  color:var(--hb-green-700);text-decoration:underline;
+  text-underline-offset:2px;word-break:break-word;
+}
+.chat-msg.user .chat-bubble{
+  background:var(--hb-ink);color:var(--hb-lime);
+  border-bottom-right-radius:5px;
+}
+.chat-msg .avatar-chip{
+  width:26px;height:26px;border-radius:50%;flex-shrink:0;
+  background:var(--hb-green-900);display:flex;align-items:center;justify-content:center;
+  margin-right:8px;
+}
+.chat-msg .avatar-chip svg{width:13px;height:13px;stroke:var(--hb-lime);}
+.chat-msg.bot{display:flex;align-items:flex-end;}
+
+.chat-suggest-row{display:flex;gap:8px;overflow-x:auto;padding:2px 16px 10px;flex-shrink:0;-webkit-overflow-scrolling:touch;}
+.chat-suggest-row::-webkit-scrollbar{display:none;}
+.chat-suggest-chip{
+  flex-shrink:0;padding:9px 14px;border-radius:var(--r-pill);
+  background:var(--hb-white);border:1px solid var(--hb-sand-dark);
+  font-size:12px;font-weight:600;color:var(--hb-green-800);white-space:nowrap;
+}
+.chat-suggest-chip:active{transform:scale(.96);}
+
+.chat-input-bar{
+  display:flex;align-items:center;gap:9px;
+  padding:10px 14px calc(16px + env(safe-area-inset-bottom,16px));
+  flex-shrink:0;border-top:1px solid var(--hb-sand);
+  background:var(--hb-cream);
+}
+.chat-input-bar input{
+  flex:1;padding:12px 16px;border-radius:var(--r-pill);
+  border:1px solid var(--hb-sand-dark);background:var(--hb-white);
+  font-size:13.5px;color:var(--hb-ink);
+}
+.chat-input-bar input::placeholder{color:var(--hb-sand-dark);}
+.chat-attach-btn{
+  width:40px;height:40px;border-radius:50%;flex-shrink:0;
+  background:var(--hb-white);border:1px solid var(--hb-sand-dark);
+  display:flex;align-items:center;justify-content:center;
+}
+.chat-attach-btn svg{width:18px;height:18px;stroke:var(--hb-green-800);}
+.chat-attach-btn:active{transform:scale(.92);}
+.chat-location-btn{
+  width:40px;height:40px;border-radius:50%;flex-shrink:0;
+  background:var(--hb-white);border:1px solid var(--hb-sand-dark);
+  display:flex;align-items:center;justify-content:center;
+}
+.chat-location-btn.is-on{background:var(--hb-green-900);border-color:var(--hb-green-900);}
+.chat-location-btn.is-on svg{stroke:var(--hb-lime);}
+.chat-location-btn svg{width:18px;height:18px;stroke:var(--hb-green-800);}
+.chat-location-btn:active{transform:scale(.92);}
+.chat-attach-preview{
+  display:flex;gap:8px;padding:8px 16px 0;flex-shrink:0;overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.chat-attach-preview:empty{display:none;}
+.chat-attach-chip{
+  position:relative;flex-shrink:0;width:56px;height:56px;border-radius:12px;
+  overflow:hidden;border:1px solid var(--hb-sand-dark);background:var(--hb-white);
+}
+.chat-attach-chip img{width:100%;height:100%;object-fit:cover;display:block;}
+.chat-attach-chip .remove-att{
+  position:absolute;top:2px;right:2px;width:18px;height:18px;border-radius:50%;
+  background:rgba(22,32,27,.75);display:flex;align-items:center;justify-content:center;
+}
+.chat-attach-chip .remove-att svg{width:10px;height:10px;stroke:var(--hb-cream);}
+.chat-msg.user .chat-bubble img.chat-img-msg{
+  display:block;max-width:100%;border-radius:12px;margin-bottom:6px;
+}
+.chat-send-btn{
+  width:44px;height:44px;border-radius:50%;flex-shrink:0;
+  background:var(--hb-ink);display:flex;align-items:center;justify-content:center;
+}
+.chat-send-btn svg{width:18px;height:18px;fill:var(--hb-lime);}
+.chat-send-btn:active{transform:scale(.92);}
+.chat-send-btn:disabled{opacity:.4;}
+
+.chat-typing{display:flex;gap:4px;padding:4px 2px;align-items:center;}
+.chat-typing span{width:6px;height:6px;border-radius:50%;background:var(--hb-ink-soft);opacity:.5;animation:chatTyping 1s infinite ease-in-out;}
+.chat-typing span:nth-child(2){animation-delay:.15s;}
+.chat-typing span:nth-child(3){animation-delay:.3s;}
+@keyframes chatTyping{0%,60%,100%{transform:translateY(0);opacity:.4;}30%{transform:translateY(-4px);opacity:1;}}
+
+/* ===== NOTIFICATION SCHEDULE PANEL ===== */
+.notif-panel{
+  margin:0 16px;
+  background:var(--hb-white);border:1px solid var(--hb-sand);border-radius:var(--r-md);
+  overflow:hidden;
+  max-height:0;
+  transition:max-height .35s cubic-bezier(.25,.8,.25,1),opacity .3s ease;
+  opacity:0;
+  pointer-events:none;
+}
+.notif-panel.open{max-height:420px;opacity:1;pointer-events:auto;}
+.notif-panel-inner{padding:16px;}
+.notif-section-title{
+  font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
+  color:var(--hb-ink-soft);margin-bottom:10px;margin-top:14px;
+}
+.notif-section-title:first-child{margin-top:0;}
+.notif-time-row{display:flex;align-items:center;gap:10px;}
+.notif-time-row input[type="time"]{
+  flex:1;padding:10px 12px;border-radius:10px;
+  border:1px solid var(--hb-sand-dark);background:var(--hb-paper);
+  font-size:15px;color:var(--hb-ink);font-family:'Inter';
+}
+.notif-freq-row{display:flex;gap:8px;flex-wrap:wrap;}
+.notif-freq-btn{
+  flex:1;min-width:80px;padding:9px 6px;border-radius:10px;
+  border:1.5px solid var(--hb-sand-dark);background:var(--hb-paper);
+  font-size:12px;font-weight:600;color:var(--hb-ink-soft);text-align:center;
+  cursor:pointer;transition:all .15s ease;
+}
+.notif-freq-btn.sel{
+  border-color:var(--hb-green-600);background:var(--hb-green-900);color:var(--hb-lime);
+}
+.notif-day-grid{display:flex;gap:7px;justify-content:space-between;}
+.notif-day-btn{
+  width:36px;height:36px;border-radius:50%;
+  border:1.5px solid var(--hb-sand-dark);background:var(--hb-paper);
+  font-size:11px;font-weight:700;color:var(--hb-ink-soft);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .15s ease;flex-shrink:0;
+}
+.notif-day-btn.sel{
+  border-color:var(--hb-green-600);background:var(--hb-green-900);color:var(--hb-lime);
+}
+.notif-save-btn{
+  width:100%;margin-top:14px;padding:12px;border-radius:var(--r-pill);
+  background:var(--hb-ink);color:var(--hb-lime);
+  font-weight:700;font-size:13.5px;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+}
+.notif-save-btn:active{transform:scale(.98);}
+
+/* ===== TOAST ===== */
+.toast{
+  position:fixed;left:50%;bottom:90px;transform:translateX(-50%);
+  background:var(--hb-ink);color:var(--hb-lime);
+  padding:10px 18px;border-radius:var(--r-pill);
+  font-size:12.5px;font-family:'IBM Plex Mono';z-index:400;
+  opacity:0;pointer-events:none;
+  transition:opacity .25s ease,transform .25s ease;
+  white-space:nowrap;max-width:90%;overflow:hidden;text-overflow:ellipsis;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(-8px);}
+
+::-webkit-scrollbar{display:none;}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.001s!important;transition-duration:.001s!important;}}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- ===== HOME PAGE ===== -->
+<div class="page active" id="page-home">
+  <div class="brand-bar">
+    <div class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--hb-lime)" stroke-width="2"><path d="M6 4v16M18 4v16M6 12h12" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <div class="logo-name">Herbalife</div>
+        <div class="logo-sub">Smart Wellness Studio</div>
+      </div>
+    </div>
+    <div class="profile-btn">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--hb-ink-soft)" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" stroke-linecap="round"/></svg>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="eyebrow"><span class="dot"></span>Today's focus</div>
+    <h1>Real videos. Your pace. Mark your own moves.</h1>
+    <p>Pick a plan, hit play, and tap "Mark this spot" any time a new exercise starts — it's saved for next time.</p>
+    <div class="stat-row">
+      <div class="stat"><b id="home-streak">0</b><span>Day streak</span></div>
+      <div class="stat"><b id="home-completed">0</b><span>Workouts</span></div>
+      <div class="stat"><b id="home-minutes">0</b><span>Minutes</span></div>
+    </div>
+  </div>
+
+  <div class="section-label"><h2>Choose your plan</h2><span class="count">6 programs</span></div>
+  <div class="cat-grid">
+    <div class="cat-card women" onclick="openPlan('women10')">
+      <div class="icon-wrap"><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=600&q=70" alt="Woman working out" loading="lazy"></div>
+      <div><div class="tag">For women</div><h3>10-Day Challenge</h3><div class="meta">10 videos</div></div>
+    </div>
+    <div class="cat-card men" onclick="openPlan('men10')">
+      <div class="icon-wrap"><img src="https://images.unsplash.com/photo-1556817411-31ae72fa3ea0?auto=format&fit=crop&w=600&q=70" alt="Man working out with dumbbells" loading="lazy"></div>
+      <div><div class="tag">For men</div><h3>10-Day Challenge</h3><div class="meta">10 videos</div></div>
+    </div>
+    <div class="cat-card women" onclick="openLifetime('women_lifetime')" style="border-color:var(--hb-lime-dim);">
+      <div class="icon-wrap"><img src="https://images.unsplash.com/photo-1552196527-bffef41ef674?auto=format&fit=crop&w=600&q=70" alt="Woman stretching" loading="lazy"></div>
+      <div><div class="tag">For women</div><h3>2-Week Plan</h3><div class="meta">2-week weight loss plan, one session a day</div></div>
+    </div>
+    <div class="cat-card men" onclick="openLifetime('men_lifetime')" style="border-color:var(--hb-lime-dim);">
+      <div class="icon-wrap"><img src="https://images.unsplash.com/photo-1549481446-baf395392d13?auto=format&fit=crop&w=600&q=70" alt="Man holding dumbbell in gym" loading="lazy"></div>
+      <div><div class="tag">For men</div><h3>2-Week Plan</h3><div class="meta">2-week weight loss plan, one session a day</div></div>
+    </div>
+    <div class="cat-card yoga" onclick="openDay('yoga',0)" style="grid-column:1/-1;">
+      <div class="icon-wrap"><img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1000&q=70" alt="Woman practicing yoga" loading="lazy"></div>
+      <div><div class="tag">Yoga</div><h3>Yoga for Weight Loss</h3><div class="meta">A separate, calming weight-loss yoga session</div></div>
+    </div>
+    <div class="cat-card extra" onclick="openPlan('extras')" style="grid-column:1/-1;">
+      <div class="icon-wrap"><img src="https://images.unsplash.com/photo-1570440828762-ab7a993dbde8?auto=format&fit=crop&w=1000&q=70" alt="HIIT kettlebell workout" loading="lazy"></div>
+      <div><div class="tag">Extra workouts</div><h3>Quick Sessions Library</h3><div class="meta">10 standalone videos · HIIT, core, stretch & more</div></div>
+    </div>
+  </div>
+
+  <div class="quote-strip">
+    "Small daily actions, repeated consistently, are what change a body — not one hard day."
+    <span>Smart Wellness Studio</span>
+  </div>
+
+  <a href="https://herbalife-smart-wellness-studio.my.canva.site/page-21" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:6px;margin:16px 16px 0;padding:13px;border-radius:var(--r-pill);background:var(--hb-white);border:1px solid var(--hb-sand-dark);color:var(--hb-green-800);font-weight:600;font-size:13px;">
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14L21 3M21 3h-7M21 3v7"/><path d="M19 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6"/></svg>
+    Back to main website
+  </a>
+
+  <div style="height:16px;flex-shrink:0;"></div>
+
+  <div class="bottom-nav">
+    <div class="nav-item active" id="nav-home" onclick="goToTab('page-home','nav-home')"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M3 11l9-7 9 7M5 10v10h14V10"/></svg>Home</div>
+    <div class="nav-item" id="nav-progress" onclick="goToTab('page-progress','nav-progress')"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M4 19V9M11 19V4M18 19v-7" stroke-linecap="round"/></svg>Progress</div>
+    <div class="nav-item" id="nav-tracker" onclick="goToTab('page-tracker','nav-tracker')"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Tracker</div>
+    <div class="nav-item" id="nav-profile" onclick="goToTab('page-profile','nav-profile')"><svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>Profile</div>
+  </div>
+</div>
+
+<!-- ===== PROGRESS PAGE ===== -->
+<div class="page" id="page-progress">
+  <div class="topbar">
+    <div class="back-btn" onclick="goToTab('page-home','nav-home')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--hb-ink)" stroke-width="2" stroke-linecap="round"><path d="M15 19l-7-7 7-7"/></svg>
+    </div>
+    <div class="tb-title">Your Progress</div>
+  </div>
+
+  <div class="stat-card-row">
+    <div class="stat-card"><b id="prog-streak">0</b><span>Day streak</span></div>
+    <div class="stat-card"><b id="prog-completed">0</b><span>Workouts</span></div>
+    <div class="stat-card"><b id="prog-minutes">0</b><span>Minutes</span></div>
+  </div>
+
+  <div class="section-label"><h2>This week</h2></div>
+  <div class="week-grid" id="week-grid"></div>
+
+  <div class="trend-card">
+    <div class="hd"><h3>Sessions trend</h3><span id="trend-range">Last 14 days</span></div>
+    <svg class="trend-svg" id="trend-svg" viewBox="0 0 300 64" preserveAspectRatio="none"></svg>
+    <div class="x-labels" id="trend-x-labels"></div>
+  </div>
+
+  <div class="section-label"><h2>Progress by plan</h2><span class="count" id="plan-prog-count">0 plans started</span></div>
+  <div class="plan-progress-list" id="plan-progress-list"></div>
+
+  <div class="section-label"><h2>Favorites</h2><span class="count" id="fav-count">0</span></div>
+  <div id="fav-list-wrap"></div>
+
+  <div style="height:20px;flex-shrink:0;"></div>
+</div>
+
+<!-- ===== REPORT MODAL ===== -->
+<div class="report-overlay" id="report-overlay">
+  <div class="report-sheet" id="report-sheet">
+    <div style="position:relative;">
+      <div class="report-close" onclick="closeReport()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </div>
+      <div class="report-card" id="report-card">
+        <div class="rc-brand"><span class="dot"></span>Smart Wellness Studio · Report</div>
+        <h2 id="rc-plan-title">Plan</h2>
+        <div class="rc-sub" id="rc-plan-sub">Progress report</div>
+        <div class="rc-pct-wrap">
+          <span class="rc-pct" id="rc-pct">0%</span>
+          <span class="rc-pct-lbl">complete</span>
+        </div>
+        <div class="rc-bar-track"><div class="rc-bar-fill" id="rc-bar-fill" style="width:0%;"></div></div>
+        <div class="rc-stats">
+          <div class="s"><b id="rc-done">0</b><span>Done</span></div>
+          <div class="s"><b id="rc-total">0</b><span>Total</span></div>
+          <div class="s"><b id="rc-streak">0</b><span>Streak</span></div>
+        </div>
+        <div class="rc-foot" id="rc-foot">Generated just now</div>
+      </div>
+    </div>
+    <div class="report-actions">
+      <button class="rep-download" onclick="downloadReport()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+        Download
+      </button>
+      <button class="rep-share" onclick="shareReport()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
+        Share
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== WEIGHT TRACKER PAGE ===== -->
+<div class="page" id="page-tracker">
+  <div class="topbar">
+    <div class="back-btn" onclick="goToTab('page-home','nav-home')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--hb-ink)" stroke-width="2" stroke-linecap="round"><path d="M15 19l-7-7 7-7"/></svg>
+    </div>
+    <div class="tb-title">Weight Tracker</div>
+  </div>
+  <div class="tracker-card">
+    <div class="small">Latest weight</div>
+    <div class="row"><span class="count" id="tracker-latest">—</span><span class="unit">kg</span></div>
+    <div class="delta" id="tracker-delta">Log your first entry to start tracking</div>
+    <svg class="spark" id="tracker-spark" viewBox="0 0 300 48" preserveAspectRatio="none"></svg>
+  </div>
+  <div class="tracker-input-row">
+    <input type="number" id="tracker-input" placeholder="e.g. 64.5" step="0.1" inputmode="decimal">
+    <button onclick="addWeightEntry()">Log entry</button>
+  </div>
+  <div class="section-label"><h2>History</h2></div>
+  <div id="tracker-log-wrap"></div>
+  <div style="height:20px;flex-shrink:0;"></div>
+</div>
+
+<!-- ===== PROFILE PAGE ===== -->
+<div class="page" id="page-profile">
+  <div class="topbar">
+    <div class="back-btn" onclick="goToTab('page-home','nav-home')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--hb-ink)" stroke-width="2" stroke-linecap="round"><path d="M15 19l-7-7 7-7"/></svg>
+    </div>
+    <div class="tb-title">Profile</div>
+  </div>
+  <div class="profile-hero">
+    <div class="avatar" id="avatar-btn" onclick="openAvatarPicker()">
+      <svg id="avatar-placeholder" viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="var(--hb-lime)" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" stroke-linecap="round"/></svg>
+      <img id="avatar-img" style="display:none;" alt="Profile photo">
+      <div class="cam-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8a2 2 0 012-2h2l1.4-2h5.2L16 6h2a2 2 0 012 2v9a2 2 0 01-2 2H6a2 2 0 01-2-2V8z"/><circle cx="12" cy="13" r="3.4"/></svg></div>
+    </div>
+    <input type="file" id="avatar-input" accept="image/*" style="display:none;" onchange="handleAvatarFile(event)">
+    <input type="file" id="avatar-input-camera" accept="image/*" capture="environment" style="display:none;" onchange="handleAvatarFile(event)">
+    <h2 id="profile-name-display">Your Wellness Journey</h2>
+    <p id="profile-summary">0 workouts completed so far</p>
+  </div>
+
+  <div class="report-overlay" id="avatar-sheet-overlay" onclick="if(event.target===this)closeAvatarPicker()">
+    <div class="report-sheet" style="max-width:300px;padding:8px;">
+      <div class="settings-list" style="padding:10px;">
+        <div class="settings-row" style="cursor:pointer;" onclick="closeAvatarPicker();document.getElementById('avatar-input-camera').click();">
+          <div class="lbl" style="display:flex;align-items:center;gap:10px;">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--hb-green-800)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8a2 2 0 012-2h2l1.4-2h5.2L16 6h2a2 2 0 012 2v9a2 2 0 01-2 2H6a2 2 0 01-2-2V8z"/><circle cx="12" cy="13" r="3.4"/></svg>
+            Take a photo
+          </div>
+        </div>
+        <div class="settings-row" style="cursor:pointer;" onclick="closeAvatarPicker();document.getElementById('avatar-input').click();">
+          <div class="lbl" style="display:flex;align-items:center;gap:10px;">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--hb-green-800)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            Choose from gallery
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label"><h2>Your details</h2></div>
+  <div class="profile-edit-list">
+    <div class="profile-field">
+      <div class="lbl">Name</div>
+      <input type="text" id="profile-name-input" placeholder="Add your name" maxlength="40" oninput="saveProfileField('name',this.value)">
+    </div>
+    <div class="profile-field">
+      <div class="lbl">About / goals</div>
+      <textarea id="profile-details-input" rows="2" placeholder="A short note about your goals…" maxlength="160" oninput="saveProfileField('details',this.value)"></textarea>
+    </div>
+  </div>
+
+  <div class="section-label"><h2>Weekly goal</h2></div>
+  <div class="settings-row">
+    <div>
+      <div class="lbl">Workouts per week</div>
+      <div class="sub" id="goal-sub">Helps pace your streak</div>
+    </div>
+    <div class="goal-stepper">
+      <button onclick="changeGoal(-1)">−</button>
+      <b id="goal-num">5</b>
+      <button onclick="changeGoal(1)">+</button>
+    </div>
+  </div>
+
+  <div class="section-label"><h2>More</h2></div>
+  <div class="settings-row" onclick="window.open('https://herbalife-smart-wellness-studio.my.canva.site/page-21','_blank')" style="cursor:pointer;">
+    <div>
+      <div class="lbl">Visit main website</div>
+      <div class="sub">Opens Smart Wellness Studio site</div>
+    </div>
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--hb-ink-soft)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14L21 3M21 3h-7M21 3v7"/><path d="M19 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6"/></svg>
+  </div>
+
+  <div class="section-label"><h2>Permissions</h2></div>
+  <div class="settings-list" id="permissions-list">
+    <div class="settings-row perm-row">
+      <div class="perm-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+      <div style="flex:1;">
+        <div class="lbl">Location</div>
+        <div class="sub" id="perm-sub-location">Used by the AI chat for nearby suggestions</div>
+      </div>
+      <div class="perm-toggle" id="perm-toggle-location" onclick="togglePermission('location')"><div class="knob"></div></div>
+    </div>
+    <div class="settings-row perm-row">
+      <div class="perm-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8a2 2 0 012-2h2l1.4-2h5.2L16 6h2a2 2 0 012 2v9a2 2 0 01-2 2H6a2 2 0 01-2-2V8z"/><circle cx="12" cy="13" r="3.4"/></svg></div>
+      <div style="flex:1;">
+        <div class="lbl">Camera</div>
+        <div class="sub" id="perm-sub-camera">For profile photo and AI photo questions</div>
+      </div>
+      <div class="perm-toggle" id="perm-toggle-camera" onclick="togglePermission('camera')"><div class="knob"></div></div>
+    </div>
+    <div class="settings-row perm-row">
+      <div class="perm-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8"/></svg></div>
+      <div style="flex:1;">
+        <div class="lbl">Microphone</div>
+        <div class="sub" id="perm-sub-microphone">For voice questions to the AI chat</div>
+      </div>
+      <div class="perm-toggle" id="perm-toggle-microphone" onclick="togglePermission('microphone')"><div class="knob"></div></div>
+    </div>
+    <div class="settings-row perm-row" style="cursor:pointer;" onclick="toggleNotifPanel()">
+      <div class="perm-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></div>
+      <div style="flex:1;">
+        <div class="lbl">Notifications</div>
+        <div class="sub" id="perm-sub-notifications">For workout and streak reminders</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="perm-toggle" id="perm-toggle-notifications" onclick="event.stopPropagation();togglePermission('notifications')"><div class="knob"></div></div>
+        <svg id="notif-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--hb-ink-soft)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;flex-shrink:0;"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Schedule Panel -->
+  <div class="notif-panel" id="notif-panel">
+    <div class="notif-panel-inner">
+      <div class="notif-section-title">Reminder time</div>
+      <div class="notif-time-row">
+        <input type="time" id="notif-time-input" value="08:00">
+      </div>
+
+      <div class="notif-section-title">Frequency</div>
+      <div class="notif-freq-row">
+        <div class="notif-freq-btn sel" id="nfreq-daily" onclick="selectFreq('daily')">Daily</div>
+        <div class="notif-freq-btn" id="nfreq-custom" onclick="selectFreq('custom')">Custom days</div>
+        <div class="notif-freq-btn" id="nfreq-weekdays" onclick="selectFreq('weekdays')">Weekdays</div>
+      </div>
+
+      <div id="notif-days-wrap" style="display:none;">
+        <div class="notif-section-title">Select days</div>
+        <div class="notif-day-grid">
+          <div class="notif-day-btn sel" data-day="0" onclick="toggleNotifDay(this)">Su</div>
+          <div class="notif-day-btn sel" data-day="1" onclick="toggleNotifDay(this)">Mo</div>
+          <div class="notif-day-btn sel" data-day="2" onclick="toggleNotifDay(this)">Tu</div>
+          <div class="notif-day-btn sel" data-day="3" onclick="toggleNotifDay(this)">We</div>
+          <div class="notif-day-btn sel" data-day="4" onclick="toggleNotifDay(this)">Th</div>
+          <div class="notif-day-btn sel" data-day="5" onclick="toggleNotifDay(this)">Fr</div>
+          <div class="notif-day-btn sel" data-day="6" onclick="toggleNotifDay(this)">Sa</div>
+        </div>
+      </div>
+
+      <button class="notif-save-btn" onclick="saveNotifSchedule()">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        Save reminder
+      </button>
+    </div>
+  </div>
+
+  <div class="section-label"><h2>Data</h2></div>
+  <button class="btn-danger" onclick="resetProgress()">
+    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>
+    Reset all progress
+  </button>
+
+  <div style="height:20px;flex-shrink:0;"></div>
+</div>
+
+<!-- ===== PLAN PAGE ===== -->
+<div class="page" id="page-plan">
+  <div class="topbar">
+    <div class="back-btn" onclick="goBack('page-home')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--hb-ink)" stroke-width="2" stroke-linecap="round"><path d="M15 19l-7-7 7-7"/></svg>
+    </div>
+    <div class="tb-title" id="plan-topbar-title">Plan</div>
+  </div>
+  <div class="plan-hero">
+    <span class="tag-pill" id="plan-tag">Plan</span>
+    <h1 id="plan-title">Plan Title</h1>
+    <p id="plan-desc">Description</p>
+  </div>
+  <div class="day-list" id="day-list"></div>
+  <div style="height:24px;flex-shrink:0;"></div>
+</div>
+
+<!-- ===== LIFETIME / TODAY'S WORKOUT PAGE ===== -->
+<div class="page" id="page-today">
+  <div class="topbar">
+    <div class="back-btn" onclick="goBack('page-home')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--hb-ink)" stroke-width="2" stroke-linecap="round"><path d="M15 19l-7-7 7-7"/></svg>
+    </div>
+    <div class="tb-title" id="today-topbar-title">2-Week Plan</div>
+  </div>
+  <div class="daydetail-hero">
+    <div class="small" id="today-plan-name">Plan</div>
+    <h1 id="today-day-title">Today's Workout</h1>
+    <div class="dd-stats">
+      <div class="s"><b id="today-stat-time">—</b><span>Length</span></div>
+      <div class="s"><b id="today-stat-count">—</b><span>Status</span></div>
+      <div class="s"><b id="today-stat-cal">—</b><span>Est. kcal</span></div>
+    </div>
+  </div>
+
+  <div class="dd-section-head">
+    <h3>Save for later</h3>
+  </div>
+  <div class="fav-row" id="today-fav-row" onclick="toggleTodayFavorite()">
+    <svg class="star" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.1-5.4 3.1 1.3-6-4.6-4.1 6.1-.6z"/></svg>
+    <span class="txt" id="today-fav-row-txt">Add to favorites</span>
+  </div>
+
+  <div class="dd-section-head">
+    <h3>How this works</h3>
+  </div>
+  <div class="tip-card">This plan repeats for life — a new workout is lined up for you automatically each day. No need to track which day you're on, just show up and press play.</div>
+
+  <div class="start-bar">
+    <button class="btn-primary" onclick="startTodayWorkout()">
+      <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      Play Video
+    </button>
+  </div>
+</div>
+
+<!-- ===== DAY DETAIL PAGE ===== -->
+<div class="page" id="page-day">
+  <div class="topbar">
+    <div class="back-btn" onclick="backFromDay()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--hb-ink)" stroke-width="2" stroke-linecap="round"><path d="M15 19l-7-7 7-7"/></svg>
+    </div>
+    <div class="tb-title" id="day-topbar-title">Day 1</div>
+  </div>
+  <div class="daydetail-hero">
+    <div class="small" id="dd-plan-name">Plan</div>
+    <h1 id="dd-day-title">Video Title</h1>
+    <div class="dd-stats">
+      <div class="s"><b id="dd-stat-time">—</b><span>Length</span></div>
+      <div class="s"><b id="dd-stat-count">—</b><span>Status</span></div>
+      <div class="s"><b id="dd-stat-cal">—</b><span>Est. kcal</span></div>
+    </div>
+  </div>
+
+  <div class="dd-section-head">
+    <h3>Save for later</h3>
+  </div>
+  <div class="fav-row" id="fav-row" onclick="toggleFavorite()">
+    <svg class="star" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.1-5.4 3.1 1.3-6-4.6-4.1 6.1-.6z"/></svg>
+    <span class="txt" id="fav-row-txt">Add to favorites</span>
+  </div>
+
+  <div class="dd-section-head">
+    <h3>Workout tip</h3>
+  </div>
+  <div class="tip-card" id="dd-tip">Use the <b>+30s / −10s</b> buttons in the player to skip filler, and tap the speed button to slow down or speed up the routine to match your pace.</div>
+
+  <div class="start-bar">
+    <button class="btn-primary" onclick="startWorkout()">
+      <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      Play Video
+    </button>
+  </div>
+</div>
+
+<!-- ===== PLAYER PAGE ===== -->
+<div class="page" id="page-player">
+  <div class="player-top">
+    <div class="icon-btn" onclick="exitWorkout()">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </div>
+    <div class="day-chip" id="player-day-chip">DAY 1</div>
+    <div class="player-top-right">
+      <div class="icon-btn" id="btn-loop" onclick="toggleLoopSegment()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
+      </div>
+      <div class="icon-btn" id="btn-mute" onclick="toggleMute()">
+        <svg id="mute-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M19 9a5 5 0 010 6"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="video-box" id="video-box">
+    <div id="yt-player"></div>
+    <div class="rest-overlay" id="rest-overlay">
+      <div class="eyebrow">Rest</div>
+      <div class="ring-wrap">
+        <svg viewBox="0 0 100 100">
+          <circle class="ring-bg" cx="50" cy="50" r="44"/>
+          <circle class="ring-fg" id="rest-ring-fg" cx="50" cy="50" r="44" stroke-dasharray="276.5" stroke-dashoffset="0"/>
+        </svg>
+        <div class="ring-num mono" id="rest-num">0:30</div>
+      </div>
+      <p class="sub">Take your time. Adjust the clock or skip ahead whenever you're ready.</p>
+      <div class="rest-adjust-row">
+        <button onclick="adjustRest(-10)">−10s</button>
+        <span class="amt mono" id="rest-amt-lbl">total: 0:30</span>
+        <button onclick="adjustRest(10)">+10s</button>
+      </div>
+      <div class="rest-actions">
+        <button class="rest-skip-btn" onclick="skipRest()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4l10 8-10 8V4zM19 5v14"/></svg>
+          Skip rest, continue video
+        </button>
+        <span class="rest-pause-toggle" id="rest-pause-toggle" onclick="toggleRestPause()">Pause timer</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="vid-progress-wrap">
+    <div class="vid-progress-track" id="vid-track" onclick="onTrackClick(event)">
+      <div class="vid-progress-fill" id="vid-fill"></div>
+    </div>
+    <div class="vid-time-row">
+      <span id="vid-time-cur" class="mono">0:00</span>
+      <span id="vid-time-dur" class="mono">0:00</span>
+    </div>
+  </div>
+
+  <div class="now-card">
+    <div class="eyebrow"><span id="now-badge">PLAYING</span></div>
+    <h2 id="now-title">Loading…</h2>
+    <div class="next-line">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 6v6l4 2"/></svg>
+      <span id="now-next">0:00 remaining</span>
+    </div>
+  </div>
+
+  <div class="player-controls">
+    <button class="ctrl-btn" onclick="skipSeconds(-10)">
+      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 19l-7-7 7-7M4 12h15"/></svg>
+      <span class="lbl">−10s</span>
+    </button>
+    <button class="ctrl-btn playpause" id="btn-playpause" onclick="togglePlay()">
+      <svg id="playpause-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    </button>
+    <button class="ctrl-btn" onclick="skipSeconds(30)">
+      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 5l7 7-7 7M5 12h15"/></svg>
+      <span class="lbl">+30s</span>
+    </button>
+    <button class="ctrl-btn speed-btn" id="btn-speed" onclick="cycleSpeed()">
+      <span class="lbl" id="speed-lbl">1x</span>
+    </button>
+  </div>
+
+  <div style="display:flex;justify-content:center;padding:2px 0 10px;flex-shrink:0;">
+    <button class="rest-trigger-btn" onclick="startRest()">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      Take a rest
+    </button>
+  </div>
+</div>
+
+<!-- ===== COMPLETE PAGE ===== -->
+<div class="page" id="page-complete">
+  <div class="complete-wrap">
+    <div class="complete-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+    </div>
+    <h1>Congratulations!</h1>
+    <p>You finished today's session. Consistency builds results — see you tomorrow.</p>
+    <div class="complete-stats">
+      <div><b id="complete-time">14</b><span>Minutes</span></div>
+      <div><b id="complete-streak">8</b><span>Day streak</span></div>
+      <div><b id="complete-cal">95</b><span>Kcal est.</span></div>
+    </div>
+    <button class="btn-primary" style="width:220px;" onclick="playerExitFn()">Back to video</button>
+  </div>
+</div>
+
+<!-- ===== AI CHAT PAGE ===== -->
+<div class="page" id="page-chat">
+  <div class="chat-header">
+    <div class="back-btn" onclick="closeChat()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--hb-ink)" stroke-width="2" stroke-linecap="round"><path d="M15 19l-7-7 7-7"/></svg>
+    </div>
+    <div class="ttl">
+      <b>Studio Assistant</b>
+      <span><span class="live-dot"></span>Your data + live web search</span>
+    </div>
+    <div class="clear-btn" onclick="clearChat()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>
+    </div>
+  </div>
+  <div class="chat-body" id="chat-body"></div>
+  <div class="chat-attach-preview" id="chat-attach-preview"></div>
+  <div class="chat-suggest-row" id="chat-suggest-row"></div>
+  <div class="chat-input-bar">
+    <input type="file" id="chat-file-input" accept="image/*" multiple capture="environment" style="display:none" onchange="handleChatFileSelect(this.files)">
+    <button class="chat-attach-btn" id="chat-attach-btn" onclick="document.getElementById('chat-file-input').click()" title="Add photo from camera or gallery">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/><path d="M16 3h6v6"/></svg>
+    </button>
+    <button class="chat-location-btn" id="chat-location-btn" onclick="toggleChatLocation()" title="Share your location">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    </button>
+    <input type="text" id="chat-input" placeholder="Ask anything…" onkeydown="if(event.key==='Enter')sendChatMessage();">
+    <button class="chat-send-btn" id="chat-send-btn" onclick="sendChatMessage()">
+      <svg viewBox="0 0 24 24"><path d="M3 11l18-8-8 18-2-8-8-2z"/></svg>
+    </button>
+  </div>
+</div>
+
+</div>
+
+<div class="chat-fab" id="chat-fab" onclick="openChat()">
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+  <div class="dot-badge"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+/* ============================================================
+   DATA — real playlists & videos as provided
+   ============================================================ */
+const PLAN_META={
+  women10:{name:"Women · 10-Day",tag:"For Women",title:"10-Day Weight Loss Challenge",desc:"A focused video program for women. Play each day's video, mark exercises the first time through, then use your marks to jump around next time."},
+  men10:  {name:"Men · 10-Day",tag:"For Men",title:"10-Day Weight Loss Challenge",desc:"A focused video program for men. Play each day's video, mark exercises the first time through, then use your marks to jump around next time."},
+  women_lifetime:{name:"Women · 2-Week",tag:"For Women",title:"2-Week Weight Loss Plan",desc:"A 2-week weight loss plan for women — one session a day."},
+  men_lifetime:  {name:"Men · 2-Week",tag:"For Men",title:"2-Week Weight Loss Plan",desc:"A 2-week weight loss plan for men — one session a day."},
+  yoga:   {name:"Yoga",tag:"Yoga",title:"Yoga for Weight Loss",desc:"A standalone yoga session focused on weight loss, kept separate from the other plans."},
+  extras: {name:"Extra Workouts",tag:"Quick Sessions",title:"Quick Sessions Library",desc:"Standalone videos — HIIT, core, stretching, warm-ups and more. Mark them the same way as the daily plans."}
+};
+
+const PLANS={
+  women10:{ ...PLAN_META.women10, days:[
+    {title:"Day 1",videoId:"917-y7Jlv9I",img:"https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=200&q=70"},
+    {title:"Day 2",videoId:"_a_yncC_Nts",img:"https://images.unsplash.com/photo-1599552683573-9dc48255fe85?auto=format&fit=crop&w=200&q=70"},
+    {title:"Day 3",videoId:"o4N9GCzXwjg",img:"https://images.unsplash.com/photo-1606902965551-dce093cda6e7?auto=format&fit=crop&w=200&q=70"},
+    {title:"Day 4",videoId:"A5Kbxnfxbwg",img:"https://images.unsplash.com/photo-1470468969717-61d5d54fd036?auto=format&fit=crop&w=200&q=70"},
+    {title:"Day 5",videoId:"E0hVfFF98mA",img:"https://images.unsplash.com/photo-1590556409324-aa1d726e5c3c?auto=format&fit=crop&w=200&q=70"},
+    {title:"Day 6",videoId:"f9gET3s6V2I",img:"https://images.unsplash.com/photo-1434596922112-19c563067271?auto=format&fit=crop&w=200&q=70"},
+    {title:"Day 7",videoId:"PQhSeDX5N3s",img:"https://images.unsplash.com/photo-1434754205268-ad3b5f549b11?auto=format&fit=crop&w=200&q=70"},
+    {title:"Day 8",videoId:"CMvJp23IduE",img:"https://images.unsplash.com/photo-1649887974297-4be052375a67?auto=format&fit=crop&w=200&q=70"},
+    {title:"Day 9",videoId:"So-if0QkblM",img:"https://images.unsplash.com/photo-1591258370814-01609b341790?auto=format&fit=crop&w=200&q=70"},
+    {title:"Day 10",videoId:"AufUQSc_Cv0",img:"https://images.unsplash.com/photo-1754257319753-577fcf6bdff4?auto=format&fit=crop&w=200&q=70"}
+  ]},
+  men10:{ ...PLAN_META.men10, days:[
+    {title:"Day 1",videoId:"h1IvVvozbys",img:"https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=200&q=70"},
+    {title:"Day 2",videoId:"RGhQoWVUeUI",img:"https://images.unsplash.com/photo-1605296867304-46d5465a13f1?auto=format&fit=crop&w=200&q=70"},
+    {title:"Day 3",videoId:"QZqlRiJ2acQ",img:"https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=200&q=70"},
+    {title:"Day 4",videoId:"Bl3C4C52U2E",img:"https://images.unsplash.com/photo-1584863231364-2edc166de576?auto=format&fit=crop&w=200&q=70"},
+    {title:"Day 5",videoId:"pLqkg5QK2g4",img:"https://images.unsplash.com/photo-1606328500899-38351f33df8a?auto=format&fit=crop&w=200&q=70"},
+    {title:"Day 6",videoId:"TYLRYNNKzIs",img:"https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=200&q=70"},
+    {title:"Day 7",videoId:"AjtUfiX2jLw",img:"https://images.unsplash.com/photo-1683758575782-a632dbbe9eed?auto=format&fit=crop&w=200&q=70"},
+    {title:"Day 8",videoId:"_IkBTIgbx_g",img:"https://images.unsplash.com/photo-1517963879433-6ad2b056d712?auto=format&fit=crop&w=200&q=70"},
+    {title:"Day 9",videoId:"r3CQUjRMyx0",img:"https://images.unsplash.com/photo-1517963628607-235ccdd5476c?auto=format&fit=crop&w=200&q=70"},
+    {title:"Day 10",videoId:"w-quS4FOkY8",img:"https://images.unsplash.com/photo-1641971215217-fc55b492d11f?auto=format&fit=crop&w=200&q=70"}
+  ]},
+  women_lifetime:{ ...PLAN_META.women_lifetime, days:[
+    {title:"2-Week Weight Loss Plan",videoId:"62sYaRGw5gE",img:"https://images.unsplash.com/photo-1552196527-bffef41ef674?auto=format&fit=crop&w=200&q=70"}
+  ]},
+  men_lifetime:{ ...PLAN_META.men_lifetime, days:[
+    {title:"2-Week Weight Loss Plan",videoId:"_aeVRHhmeYs",img:"https://images.unsplash.com/photo-1549481446-baf395392d13?auto=format&fit=crop&w=200&q=70"}
+  ]},
+  yoga:{ ...PLAN_META.yoga, days:[
+    {title:"Yoga for Weight Loss",videoId:"RHaP9buMOeI",img:"https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=200&q=70"}
+  ]},
+  extras: { ...PLAN_META.extras, days:[
+    {title:"10-Min Weight Loss Daily",videoId:"3wR1voje2lE",img:"https://images.unsplash.com/photo-1593308610775-48f0102f1722?auto=format&fit=crop&w=200&q=70"},
+    {title:"Immunity Booster",videoId:"FzKxaiStusQ",img:"https://images.unsplash.com/photo-1592334628151-36869c12ad0e?auto=format&fit=crop&w=200&q=70"},
+    {title:"100 Cal Burner",videoId:"kF3OuR6PxXE",img:"https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=200&q=70"},
+    {title:"10-Min Full Body Workout",videoId:"nlcX72W_CKs",img:"https://images.unsplash.com/photo-1521804906057-1df8fdb718b7?auto=format&fit=crop&w=200&q=70"},
+    {title:"10-Min Six Pack Workout",videoId:"DPKLZ4AxE3c",img:"https://images.unsplash.com/photo-1754258166830-5ad129d9c61a?auto=format&fit=crop&w=200&q=70"},
+    {title:"10-Min Abs Workout",videoId:"n4aIveDzwcQ",img:"https://images.unsplash.com/photo-1754257320300-e159f7cfa864?auto=format&fit=crop&w=200&q=70"},
+    {title:"Bedtime Stretch",videoId:"8PKbeVFwVgk",img:"https://images.unsplash.com/photo-1525296416200-59aaed194d0c?auto=format&fit=crop&w=200&q=70"},
+    {title:"Daily Warm-Up Routine",videoId:"KN0AIpq8aZA",img:"https://images.unsplash.com/photo-1635367216109-aa3353c0c22e?auto=format&fit=crop&w=200&q=70"},
+    {title:"10-Min HIIT (No Jumping)",videoId:"bZ3MrRWxmFY",img:"https://images.unsplash.com/photo-1754257319910-93b587098ac6?auto=format&fit=crop&w=200&q=70"},
+    {title:"No-Crunch Ab Workout",videoId:"Sl-5D_JIWlc",img:"https://images.unsplash.com/photo-1754257319805-3c5424262197?auto=format&fit=crop&w=200&q=70"}
+  ]}
+};
+
+/* ============================================================
+   APP STATE
+   ============================================================ */
+let state={
+  streak:   parseInt(localStorage.getItem('hb_streak')||'0'),
+  completed:parseInt(localStorage.getItem('hb_total')||'0'),
+  minutes:  parseInt(localStorage.getItem('hb_minutes')||'0'),
+  doneDays: JSON.parse(localStorage.getItem('hb_done')||'{}'),
+  favs:     JSON.parse(localStorage.getItem('hb_favs')||'{}'),
+  log:      JSON.parse(localStorage.getItem('hb_log')||'[]'),
+  sessions: JSON.parse(localStorage.getItem('hb_sessions')||'[]'),
+  goal:     parseInt(localStorage.getItem('hb_goal')||'5'),
+  lifetimeStarts: JSON.parse(localStorage.getItem('hb_lifetime_starts')||'{}'),
+  profile:  JSON.parse(localStorage.getItem('hb_profile')||'{"name":"","details":"","photo":""}'),
+  planId:null,dayIdx:0,
+  isLifetime:false
+};
+
+function todayKey(){
+  const d=new Date();
+  return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+}
+function favKey(planId,dayIdx){return planId+'_'+dayIdx;}
+function lifetimeFavKey(planId){return 'lifetime_'+planId;}
+function isFavorite(planId,dayIdx){return !!state.favs[favKey(planId,dayIdx)];}
+function isLifetimeFavorite(planId){return !!state.favs[lifetimeFavKey(planId)];}
+function toggleFavorite(){
+  const key=favKey(state.planId,state.dayIdx);
+  if(state.favs[key])delete state.favs[key];
+  else state.favs[key]=true;
+  localStorage.setItem('hb_favs',JSON.stringify(state.favs));
+  renderFavRow();
+}
+function logWorkoutToday(){
+  state.log.push(todayKey());
+  if(state.log.length>60)state.log=state.log.slice(-60);
+  localStorage.setItem('hb_log',JSON.stringify(state.log));
+}
+function logSession(planId,minutes){
+  state.sessions.push({date:todayKey(),ts:Date.now(),planId:planId,minutes:minutes||0});
+  if(state.sessions.length>500)state.sessions=state.sessions.slice(-500);
+  localStorage.setItem('hb_sessions',JSON.stringify(state.sessions));
+}
+
+let ytPlayer=null;
+let ytReady=false;
+let activeVideoId=null;
+let activeDuration=0;
+let progressTimer=null;
+let pendingAutoplay=false;
+let playbackSpeed=1;
+
+/* ---- Rest timer state ---- */
+const REST_RING_CIRC=276.5; /* 2*PI*44 */
+let restTotal=30;
+let restRemaining=30;
+let restTimerId=null;
+let restPaused=false;
+let restWasPlayingBeforeStart=false;
+
+/* ---- Mute state ---- */
+let isMuted=false;
+
+/* ---- Loop-a-section state ---- */
+let loopActive=false;
+let loopStart=0;
+let loopEnd=0;
+
+function fmtTime(sec){
+  sec=Math.max(0,Math.floor(sec||0));
+  const m=Math.floor(sec/60).toString().padStart(2,'0');
+  const s=Math.floor(sec%60).toString().padStart(2,'0');
+  return `${m}:${s}`;
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+let currentPage='page-home';
+
+function goTo(targetId){
+  const cur=document.getElementById(currentPage);
+  const next=document.getElementById(targetId);
+  cur.classList.add('exit-left');
+  next.classList.add('active');
+  next.scrollTop=0;
+  setTimeout(()=>{cur.classList.remove('active','exit-left');},360);
+  currentPage=targetId;
+}
+
+function goBack(targetId){
+  const cur=document.getElementById(currentPage);
+  const prev=document.getElementById(targetId);
+  prev.style.transform='translateX(-30%)';
+  prev.classList.add('active');
+  requestAnimationFrame(()=>{
+    requestAnimationFrame(()=>{
+      prev.style.transition='transform .35s cubic-bezier(.25,.8,.25,1)';
+      prev.style.transform='translateX(0)';
+      cur.style.transition='transform .35s cubic-bezier(.25,.8,.25,1)';
+      cur.style.transform='translateX(100%)';
+    });
+  });
+  setTimeout(()=>{
+    cur.classList.remove('active');
+    cur.style.transform='';cur.style.transition='';
+    prev.style.transition='';prev.style.transform='';
+  },360);
+  currentPage=targetId;
+}
+
+/* Bottom-tab navigation: switches page + highlights the right nav icon */
+function goToTab(targetId,navId){
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById(navId).classList.add('active');
+  if(currentPage!==targetId){
+    if(targetId==='page-home')goBack('page-home');
+    else goTo(targetId);
+  }
+  if(targetId==='page-progress')renderProgressPage();
+  if(targetId==='page-tracker')renderTrackerPage();
+  if(targetId==='page-profile')renderProfilePage();
+}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+/* ============================================================
+   HOME
+   ============================================================ */
+function renderHomeStats(){
+  document.getElementById('home-streak').textContent=state.streak;
+  document.getElementById('home-completed').textContent=state.completed;
+  document.getElementById('home-minutes').textContent=state.minutes;
+}
+renderHomeStats();
+
+/* ============================================================
+   PROGRESS PAGE
+   ============================================================ */
+function renderProgressPage(){
+  document.getElementById('prog-streak').textContent=state.streak;
+  document.getElementById('prog-completed').textContent=state.completed;
+  document.getElementById('prog-minutes').textContent=state.minutes;
+
+  const grid=document.getElementById('week-grid');
+  grid.innerHTML='';
+  const dayLabels=['S','M','T','W','T','F','S'];
+  const today=new Date();
+  for(let i=6;i>=0;i--){
+    const d=new Date();
+    d.setDate(today.getDate()-i);
+    const key=d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+    const done=state.log.includes(key);
+    const isToday=i===0;
+    const el=document.createElement('div');
+    el.className='week-day'+(done?' done':'')+(isToday?' today':'');
+    el.innerHTML=`<span class="lbl">${dayLabels[d.getDay()]}</span>
+      <div class="dot">${done?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>':''}</div>`;
+    grid.appendChild(el);
+  }
+
+  renderTrendChart();
+  renderPlanProgressList();
+
+  const favKeys=Object.keys(state.favs);
+  document.getElementById('fav-count').textContent=favKeys.length;
+  const wrap=document.getElementById('fav-list-wrap');
+  if(favKeys.length===0){
+    wrap.innerHTML='<div class="empty-note">No favorites yet. Open any day or session and tap "Add to favorites" to save it here for quick access.</div>';
+    return;
+  }
+  let html='<div class="fav-list">';
+  favKeys.forEach(key=>{
+    if(key.startsWith('lifetime_')){
+      const planId=key.slice('lifetime_'.length);
+      const plan=PLANS[planId];
+      if(!plan)return;
+      html+=`<div class="fav-list-item" onclick="openLifetime('${planId}')">
+        <svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 3l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.1-5.4 3.1 1.3-6-4.6-4.1 6.1-.6z"/></svg>
+        <span class="nm">2-Week Plan</span>
+        <span class="sub">${plan.tag}</span>
+      </div>`;
+      return;
+    }
+    const [planId,idxStr]=key.split('_');
+    const idx=parseInt(idxStr);
+    const plan=PLANS[planId];
+    if(!plan||!plan.days[idx])return;
+    const day=plan.days[idx];
+    html+=`<div class="fav-list-item" onclick="openDay('${planId}',${idx})">
+      <svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 3l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.1-5.4 3.1 1.3-6-4.6-4.1 6.1-.6z"/></svg>
+      <span class="nm">${day.title}</span>
+      <span class="sub">${plan.tag}</span>
+    </div>`;
+  });
+  html+='</div>';
+  wrap.innerHTML=html;
+}
+
+/* ---- Sessions trend line chart: real completed-session counts per day,
+   over the last 14 days, built from state.sessions (permanently saved). ---- */
+function renderTrendChart(){
+  const svg=document.getElementById('trend-svg');
+  const xLabels=document.getElementById('trend-x-labels');
+  const DAYS=14;
+  const buckets=[];
+  const today=new Date();
+  for(let i=DAYS-1;i>=0;i--){
+    const d=new Date();
+    d.setDate(today.getDate()-i);
+    const key=d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+    const count=state.sessions.filter(s=>s.date===key).length;
+    buckets.push({key,count,d});
+  }
+  const maxCount=Math.max(1,...buckets.map(b=>b.count));
+  const w=300,h=64,pad=4;
+  const pts=buckets.map((b,i)=>{
+    const x=DAYS===1?w/2:(i/(DAYS-1))*w;
+    const y=h-pad-(b.count/maxCount)*(h-pad*2);
+    return {x,y};
+  });
+  const lineStr=pts.map(p=>p.x+','+p.y).join(' ');
+  const areaStr=`${pts[0].x},${h} `+lineStr+` ${pts[pts.length-1].x},${h}`;
+  const hasAny=buckets.some(b=>b.count>0);
+  svg.innerHTML=hasAny?`
+    <polygon points="${areaStr}" fill="var(--hb-lime)" opacity="0.12"/>
+    <polyline points="${lineStr}" fill="none" stroke="var(--hb-green-600)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    ${pts.map((p,i)=>buckets[i].count>0?`<circle cx="${p.x}" cy="${p.y}" r="2.6" fill="var(--hb-lime-dim)"/>`:'').join('')}
+  `:`<line x1="0" y1="${h-pad}" x2="${w}" y2="${h-pad}" stroke="var(--hb-sand)" stroke-width="1.5"/>`;
+
+  xLabels.innerHTML='';
+  [0,Math.floor(DAYS/2),DAYS-1].forEach(i=>{
+    const b=buckets[i];
+    const span=document.createElement('span');
+    span.textContent=b.d.toLocaleDateString(undefined,{day:'2-digit',month:'short'});
+    xLabels.appendChild(span);
+  });
+}
+
+/* ---- Per-plan progress bars: real % complete per plan, computed from
+   state.doneDays which is permanently saved to localStorage. ---- */
+function planProgressStats(planId){
+  const plan=PLANS[planId];
+  const total=plan.days.length;
+  let done=0;
+  plan.days.forEach((_,idx)=>{ if(state.doneDays[planId+'_'+idx])done++; });
+  const sessionsForPlan=state.sessions.filter(s=>s.planId===planId);
+  const minutesForPlan=sessionsForPlan.reduce((sum,s)=>sum+(s.minutes||0),0);
+  const pct=total>0?Math.round((done/total)*100):0;
+  return {plan,total,done,pct,sessionsCount:sessionsForPlan.length,minutesForPlan};
+}
+function renderPlanProgressList(){
+  const wrap=document.getElementById('plan-progress-list');
+  const countEl=document.getElementById('plan-prog-count');
+  const ids=Object.keys(PLANS);
+  const started=ids.filter(id=>planProgressStats(id).sessionsCount>0||Object.keys(state.doneDays).some(k=>k.startsWith(id+'_')));
+  countEl.textContent=started.length+' plan'+(started.length===1?'':'s')+' started';
+
+  if(ids.length===0){wrap.innerHTML='';return;}
+  let html='';
+  ids.forEach(id=>{
+    const s=planProgressStats(id);
+    html+=`<div class="plan-prog-row" onclick="openReport('${id}')">
+      <div class="top"><span class="nm">${s.plan.title}</span><span class="pct">${s.pct}%</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:${s.pct}%;"></div></div>
+      <div class="meta">${s.done}/${s.total} days · ${s.sessionsCount} session${s.sessionsCount===1?'':'s'} · tap for full report</div>
+    </div>`;
+  });
+  wrap.innerHTML=html;
+}
+
+/* ============================================================
+   PER-PLAN REPORT — built from real, permanently-saved progress
+   data (state.doneDays / state.sessions / state.streak), downloadable
+   as an image or shareable to any app via the Web Share API.
+   ============================================================ */
+let reportPlanId=null;
+function openReport(planId){
+  reportPlanId=planId;
+  const s=planProgressStats(planId);
+  document.getElementById('rc-plan-title').textContent=s.plan.title;
+  document.getElementById('rc-plan-sub').textContent=s.plan.tag+' · Progress report';
+  document.getElementById('rc-pct').textContent=s.pct+'%';
+  document.getElementById('rc-bar-fill').style.width=s.pct+'%';
+  document.getElementById('rc-done').textContent=s.done;
+  document.getElementById('rc-total').textContent=s.total;
+  document.getElementById('rc-streak').textContent=state.streak;
+  document.getElementById('rc-foot').textContent='Generated '+new Date().toLocaleDateString(undefined,{day:'2-digit',month:'short',year:'numeric'});
+  document.getElementById('report-overlay').classList.add('show');
+}
+function closeReport(){
+  document.getElementById('report-overlay').classList.remove('show');
+}
+function reportFileName(){
+  const s=reportPlanId?PLANS[reportPlanId]:null;
+  const slug=(s?s.title:'progress').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+  return 'wellness-report-'+slug+'.png';
+}
+async function renderReportToCanvas(){
+  const card=document.getElementById('report-card');
+  return await html2canvas(card,{backgroundColor:null,scale:2});
+}
+async function downloadReport(){
+  if(typeof html2canvas==='undefined'){showToast('Could not generate image');return;}
+  try{
+    const canvas=await renderReportToCanvas();
+    const link=document.createElement('a');
+    link.download=reportFileName();
+    link.href=canvas.toDataURL('image/png');
+    link.click();
+    showToast('Report downloaded');
+  }catch(e){
+    showToast('Could not download report');
+  }
+}
+async function shareReport(){
+  if(typeof html2canvas==='undefined'){showToast('Could not generate image');return;}
+  try{
+    const canvas=await renderReportToCanvas();
+    canvas.toBlob(async(blob)=>{
+      if(!blob){showToast('Could not generate image');return;}
+      const file=new File([blob],reportFileName(),{type:'image/png'});
+      const s=reportPlanId?PLANS[reportPlanId]:null;
+      const shareText=s?`My progress on "${s.title}" — ${document.getElementById('rc-pct').textContent} complete on Smart Wellness Studio!`:'My Smart Wellness Studio progress!';
+      if(navigator.canShare&&navigator.canShare({files:[file]})){
+        await navigator.share({files:[file],title:'Wellness Studio Progress',text:shareText});
+      } else if(navigator.share){
+        await navigator.share({title:'Wellness Studio Progress',text:shareText});
+      } else {
+        const link=document.createElement('a');
+        link.download=reportFileName();
+        link.href=canvas.toDataURL('image/png');
+        link.click();
+        showToast('Sharing not supported here — downloaded instead');
+      }
+    },'image/png');
+  }catch(e){
+    showToast('Could not share report');
+  }
+}
+
+
+/* ============================================================
+   WEIGHT TRACKER PAGE (local only, no API needed)
+   ============================================================ */
+function getWeightLog(){
+  try{return JSON.parse(localStorage.getItem('hb_weight_log')||'[]');}catch(e){return [];}
+}
+function setWeightLog(log){localStorage.setItem('hb_weight_log',JSON.stringify(log));}
+
+function addWeightEntry(){
+  const input=document.getElementById('tracker-input');
+  const val=parseFloat(input.value);
+  if(!val||val<=0||val>400){showToast('Enter a valid weight in kg');return;}
+  const log=getWeightLog();
+  const d=new Date();
+  log.push({ts:d.getTime(),label:d.toLocaleDateString(undefined,{day:'2-digit',month:'short'}),value:val});
+  setWeightLog(log);
+  input.value='';
+  renderTrackerPage();
+  showToast('Logged '+val+' kg');
+}
+function deleteWeightEntry(idx){
+  const log=getWeightLog();
+  log.splice(idx,1);
+  setWeightLog(log);
+  renderTrackerPage();
+}
+function renderTrackerPage(){
+  const log=getWeightLog();
+  const latestEl=document.getElementById('tracker-latest');
+  const deltaEl=document.getElementById('tracker-delta');
+  const spark=document.getElementById('tracker-spark');
+
+  if(log.length===0){
+    latestEl.textContent='—';
+    deltaEl.textContent='Log your first entry to start tracking';
+    deltaEl.className='delta';
+    spark.innerHTML='';
+  } else {
+    const last=log[log.length-1];
+    latestEl.textContent=last.value;
+    if(log.length>1){
+      const prev=log[log.length-2];
+      const diff=+(last.value-prev.value).toFixed(1);
+      deltaEl.textContent=(diff>0?'+':'')+diff+' kg since last entry';
+      deltaEl.className='delta'+(diff>0?' up':'');
+    } else {
+      deltaEl.textContent='First entry logged';
+      deltaEl.className='delta';
+    }
+    const vals=log.map(e=>e.value);
+    const min=Math.min(...vals),max=Math.max(...vals);
+    const range=(max-min)||1;
+    const pts=log.map((e,i)=>{
+      const x=log.length===1?150:(i/(log.length-1))*300;
+      const y=42-((e.value-min)/range)*36;
+      return x+','+y;
+    }).join(' ');
+    spark.innerHTML=`<polyline points="${pts}" fill="none" stroke="var(--hb-lime)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+  }
+
+  const wrap=document.getElementById('tracker-log-wrap');
+  if(log.length===0){
+    wrap.innerHTML='<div class="empty-note">No entries yet. Log your weight above to see your trend over time.</div>';
+    return;
+  }
+  let html='<div class="tracker-log">';
+  log.slice().reverse().forEach((e,i)=>{
+    const realIdx=log.length-1-i;
+    html+=`<div class="tracker-row">
+      <span class="d mono">${e.label}</span>
+      <span class="v">${e.value} kg</span>
+      <button class="del" onclick="deleteWeightEntry(${realIdx})">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>`;
+  });
+  html+='</div>';
+  wrap.innerHTML=html;
+}
+
+/* ============================================================
+   PROFILE PAGE
+   ============================================================ */
+function renderProfilePage(){
+  document.getElementById('profile-summary').textContent=
+    state.completed+' workout'+(state.completed===1?'':'s')+' completed so far · '+state.streak+' day streak';
+  document.getElementById('goal-num').textContent=state.goal;
+
+  const p=state.profile||{};
+  document.getElementById('profile-name-display').textContent=p.name&&p.name.trim()?p.name.trim():'Your Wellness Journey';
+  document.getElementById('profile-name-input').value=p.name||'';
+  document.getElementById('profile-details-input').value=p.details||'';
+
+  const img=document.getElementById('avatar-img');
+  const placeholder=document.getElementById('avatar-placeholder');
+  if(p.photo){
+    img.src=p.photo;img.style.display='block';placeholder.style.display='none';
+  } else {
+    img.style.display='none';placeholder.style.display='block';
+  }
+
+  renderPermissions();
+  // Restore saved notification schedule label
+  const savedNotif=getNotifSchedule();
+  if(savedNotif && Notification.permission==='granted') updateNotifSubLabel(savedNotif);
+}
+function saveProfileField(field,value){
+  state.profile=state.profile||{};
+  state.profile[field]=value;
+  localStorage.setItem('hb_profile',JSON.stringify(state.profile));
+  if(field==='name'){
+    document.getElementById('profile-name-display').textContent=value&&value.trim()?value.trim():'Your Wellness Journey';
+  }
+}
+function openAvatarPicker(){document.getElementById('avatar-sheet-overlay').classList.add('show');}
+function closeAvatarPicker(){document.getElementById('avatar-sheet-overlay').classList.remove('show');}
+function handleAvatarFile(ev){
+  const file=ev.target.files&&ev.target.files[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    state.profile=state.profile||{};
+    state.profile.photo=e.target.result;
+    localStorage.setItem('hb_profile',JSON.stringify(state.profile));
+    renderProfilePage();
+    showToast('Profile photo updated');
+  };
+  reader.readAsDataURL(file);
+  ev.target.value='';
+}
+function changeGoal(delta){
+  state.goal=Math.max(1,Math.min(7,state.goal+delta));
+  localStorage.setItem('hb_goal',state.goal);
+  document.getElementById('goal-num').textContent=state.goal;
+}
+function resetProgress(){
+  if(!confirm('This clears your streak, workout history, favorites and weight log on this device. Your profile name, photo and details are kept. Continue?'))return;
+  ['hb_streak','hb_total','hb_minutes','hb_done','hb_favs','hb_log','hb_sessions','hb_goal','hb_weight_log','hb_lifetime_starts','hb_last_done_day'].forEach(k=>localStorage.removeItem(k));
+  state.streak=0;state.completed=0;state.minutes=0;state.doneDays={};state.favs={};state.log=[];state.sessions=[];state.goal=5;state.lifetimeStarts={};
+  renderHomeStats();
+  renderProfilePage();
+  showToast('Progress reset');
+}
+
+/* ============================================================
+   PLAN PAGE
+   ============================================================ */
+function renderDayList(planId){
+  const plan=PLANS[planId];
+  const list=document.getElementById('day-list');
+  list.innerHTML='';
+  plan.days.forEach((day,idx)=>{
+    const key=planId+'_'+idx;
+    const done=!!state.doneDays[key];
+    const fav=isFavorite(planId,idx);
+    const div=document.createElement('div');
+    div.className='day-card'+(done?' done':'');
+    div.innerHTML=`
+      <div class="day-num"><img src="${day.img}" alt="${day.title}" loading="lazy"><span class="num-badge">${planId==='extras'?'Vid '+(idx+1):'Day '+(idx+1)}</span></div>
+      <div class="info">
+        <h4>${day.title}</h4>
+        <div class="sub">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 5v14l11-7z"/></svg>
+          YouTube · ${done?'Completed':'Tap to start'}
+        </div>
+      </div>
+      <div class="fav-star${fav?' is-fav':''}" data-idx="${idx}">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.1-5.4 3.1 1.3-6-4.6-4.1 6.1-.6z"/></svg>
+      </div>
+      <div class="status">${done?`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>`:''}</div>
+    `;
+    div.querySelector('.fav-star').addEventListener('click',(ev)=>{
+      ev.stopPropagation();
+      const k=favKey(planId,idx);
+      if(state.favs[k])delete state.favs[k];else state.favs[k]=true;
+      localStorage.setItem('hb_favs',JSON.stringify(state.favs));
+      ev.currentTarget.classList.toggle('is-fav',!!state.favs[k]);
+    });
+    div.addEventListener('click',()=>openDay(planId,idx));
+    list.appendChild(div);
+  });
+}
+
+function openPlan(planId){
+  state.planId=planId;
+  const plan=PLANS[planId];
+  document.getElementById('plan-topbar-title').textContent=plan.tag;
+  document.getElementById('plan-tag').textContent=plan.tag;
+  document.getElementById('plan-title').textContent=plan.title;
+  document.getElementById('plan-desc').textContent=plan.desc;
+
+  renderDayList(planId);
+  goTo('page-plan');
+}
+
+/* ============================================================
+   DAY DETAIL PAGE
+   ============================================================ */
+function openDay(planId,dayIdx){
+  state.planId=planId;state.dayIdx=dayIdx;
+  const plan=PLANS[planId];
+  const day=plan.days[dayIdx];
+  const done=!!state.doneDays[planId+'_'+dayIdx];
+
+  document.getElementById('day-topbar-title').textContent=day.title;
+  document.getElementById('dd-plan-name').textContent=plan.name;
+  document.getElementById('dd-day-title').textContent=day.title;
+  document.getElementById('dd-stat-time').textContent='—';
+  document.getElementById('dd-stat-count').textContent=done?'Done':'Pending';
+  document.getElementById('dd-stat-cal').textContent='~70';
+
+  renderFavRow();
+  goTo('page-day');
+}
+
+/* Back button from the day-detail page: refresh the list first (so a
+   just-completed day's tick mark shows up immediately), then go back.
+   If the day was opened directly (e.g. the single-video Yoga plan, which
+   has no list page), go straight back to home instead. */
+function backFromDay(){
+  if(state.planId==='yoga'){
+    goBack('page-home');
+  } else {
+    renderDayList(state.planId);
+    goBack('page-plan');
+  }
+}
+
+function renderFavRow(){
+  const fav=isFavorite(state.planId,state.dayIdx);
+  document.getElementById('fav-row').classList.toggle('is-fav',fav);
+  document.getElementById('fav-row-txt').textContent=fav?'Saved to favorites':'Add to favorites';
+}
+
+/* ============================================================
+   LIFETIME PLAN (repeats forever, date-driven, no day list)
+   ============================================================ */
+function dayStartOf(d){
+  const x=new Date(d);
+  x.setHours(0,0,0,0);
+  return x;
+}
+function getLifetimeDayIndex(planId){
+  let startStr=state.lifetimeStarts[planId];
+  if(!startStr){
+    startStr=new Date().toISOString();
+    state.lifetimeStarts[planId]=startStr;
+    localStorage.setItem('hb_lifetime_starts',JSON.stringify(state.lifetimeStarts));
+  }
+  const start=dayStartOf(new Date(startStr));
+  const today=dayStartOf(new Date());
+  const diffDays=Math.floor((today-start)/86400000);
+  const plan=PLANS[planId];
+  const len=plan.days.length;
+  const idx=((diffDays%len)+len)%len; /* always 0..len-1, safe for any sign */
+  return idx;
+}
+
+function openLifetime(planId){
+  state.planId=planId;
+  state.dayIdx=getLifetimeDayIndex(planId);
+  state.isLifetime=true;
+  const plan=PLANS[planId];
+  const day=plan.days[state.dayIdx];
+
+  document.getElementById('today-topbar-title').textContent=plan.tag+' · 2-Week Plan';
+  document.getElementById('today-plan-name').textContent=plan.tag+' · 2-Week Plan';
+  document.getElementById('today-day-title').textContent="Today's Workout";
+  document.getElementById('today-stat-time').textContent='—';
+  document.getElementById('today-stat-count').textContent='Ready';
+  document.getElementById('today-stat-cal').textContent='~70';
+
+  renderTodayFavRow();
+  goTo('page-today');
+}
+
+function toggleTodayFavorite(){
+  const key=lifetimeFavKey(state.planId);
+  if(state.favs[key])delete state.favs[key];
+  else state.favs[key]=true;
+  localStorage.setItem('hb_favs',JSON.stringify(state.favs));
+  renderTodayFavRow();
+}
+function renderTodayFavRow(){
+  const fav=isLifetimeFavorite(state.planId);
+  document.getElementById('today-fav-row').classList.toggle('is-fav',fav);
+  document.getElementById('today-fav-row-txt').textContent=fav?'Saved to favorites':'Add to favorites';
+}
+
+function startTodayWorkout(){
+  startWorkoutCore(()=>goBack('page-today'));
+}
+
+/* ============================================================
+   YOUTUBE PLAYER SETUP
+   ============================================================ */
+function onYouTubeIframeAPIReady(){
+  ytPlayer=new YT.Player('yt-player',{
+    height:'100%',width:'100%',
+    playerVars:{rel:0,playsinline:1,modestbranding:1},
+    events:{
+      onReady:onPlayerReady,
+      onStateChange:onPlayerStateChange
+    }
+  });
+}
+function onPlayerReady(){
+  ytReady=true;
+  if(pendingAutoplay && activeVideoId){
+    ytPlayer.loadVideoById(activeVideoId);
+    pendingAutoplay=false;
+  }
+}
+function onPlayerStateChange(e){
+  if(e.data===YT.PlayerState.PLAYING){
+    setPlayIcon(true);
+    startProgressLoop();
+  } else if(e.data===YT.PlayerState.PAUSED){
+    setPlayIcon(false);
+  } else if(e.data===YT.PlayerState.ENDED){
+    setPlayIcon(false);
+    stopProgressLoop();
+    completeWorkout();
+  } else if(e.data===YT.PlayerState.CUED){
+    activeDuration=ytPlayer.getDuration()||0;
+    document.getElementById('vid-time-dur').textContent=fmtTime(activeDuration);
+    if(typeof ytPlayer.setPlaybackRate==='function')ytPlayer.setPlaybackRate(playbackSpeed);
+    updateNowCard(0,activeDuration);
+  }
+}
+
+/* ============================================================
+   PLAYER PAGE LOGIC
+   ============================================================ */
+function startWorkout(){
+  state.isLifetime=false;
+  startWorkoutCore(()=>goBack('page-day'));
+}
+
+function startWorkoutCore(onExitGoBack){
+  playerExitFn=onExitGoBack;
+  const plan=PLANS[state.planId];
+  const day=plan.days[state.dayIdx];
+  activeVideoId=day.videoId;
+  activeDuration=0;
+  playbackSpeed=1;
+  document.getElementById('speed-lbl').textContent='1x';
+
+  stopRestTimer();
+  document.getElementById('rest-overlay').classList.remove('show');
+  cancelLoopSegment();
+  isMuted=false;
+  document.getElementById('mute-icon').innerHTML='<path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M19 9a5 5 0 010 6"/>';
+  document.getElementById('btn-mute').classList.remove('is-active');
+
+  document.getElementById('player-day-chip').textContent=
+    state.isLifetime?('TODAY · '+plan.tag.toUpperCase())
+    :(state.planId==='extras'?'SESSION · ':'DAY '+(state.dayIdx+1)+' · ')+plan.tag.toUpperCase();
+  document.getElementById('now-title').textContent=state.isLifetime?"Today's Workout":day.title;
+  document.getElementById('now-badge').textContent='LOADING';
+  document.getElementById('now-next').textContent='0:00 remaining';
+  document.getElementById('vid-time-cur').textContent='0:00';
+  document.getElementById('vid-time-dur').textContent='0:00';
+  document.getElementById('vid-fill').style.width='0%';
+
+  goTo('page-player');
+
+  if(ytReady){
+    ytPlayer.loadVideoById(activeVideoId);
+  } else {
+    pendingAutoplay=true;
+  }
+}
+let playerExitFn=()=>goBack('page-day');
+
+function startProgressLoop(){
+  stopProgressLoop();
+  progressTimer=setInterval(()=>{
+    if(!ytPlayer||typeof ytPlayer.getCurrentTime!=='function')return;
+    const cur=ytPlayer.getCurrentTime()||0;
+    const dur=ytPlayer.getDuration()||activeDuration||0;
+    if(dur && dur!==activeDuration){
+      activeDuration=dur;
+      document.getElementById('vid-time-dur').textContent=fmtTime(dur);
+    }
+    document.getElementById('vid-time-cur').textContent=fmtTime(cur);
+    const pct=dur>0?(cur/dur*100):0;
+    document.getElementById('vid-fill').style.width=pct+'%';
+    updateNowCard(cur,dur);
+
+    /* Once the replayed 15s stretch has passed, turn the loop indicator
+       off so normal playback continues uninterrupted (one-time repeat). */
+    if(loopActive && cur>=loopEnd){
+      cancelLoopSegment();
+    }
+  },500);
+}
+function stopProgressLoop(){
+  if(progressTimer){clearInterval(progressTimer);progressTimer=null;}
+}
+
+function updateNowCard(curTimeOverride,durOverride){
+  document.getElementById('now-badge').textContent='PLAYING';
+  document.getElementById('now-title').textContent=
+    state.isLifetime?"Today's Workout":PLANS[state.planId].days[state.dayIdx].title;
+
+  let cur=curTimeOverride;
+  if(cur===undefined && ytPlayer && typeof ytPlayer.getCurrentTime==='function'){
+    cur=ytPlayer.getCurrentTime()||0;
+  }
+  cur=cur||0;
+  const dur=durOverride!==undefined?durOverride:activeDuration;
+  const remaining=Math.max(0,(dur||0)-cur);
+  document.getElementById('now-next').textContent=dur?fmtTime(remaining)+' remaining':'Loading…';
+}
+
+function onTrackClick(ev){
+  if(!activeDuration)return;
+  const track=document.getElementById('vid-track');
+  const rect=track.getBoundingClientRect();
+  const pct=Math.min(1,Math.max(0,(ev.clientX-rect.left)/rect.width));
+  const t=pct*activeDuration;
+  if(ytPlayer&&typeof ytPlayer.seekTo==='function'){
+    ytPlayer.seekTo(t,true);
+    updateNowCard(t);
+  }
+}
+
+function skipSeconds(sec){
+  if(!ytPlayer||typeof ytPlayer.getCurrentTime!=='function')return;
+  const cur=ytPlayer.getCurrentTime()||0;
+  const dur=ytPlayer.getDuration()||activeDuration||0;
+  const t=Math.min(dur,Math.max(0,cur+sec));
+  ytPlayer.seekTo(t,true);
+  updateNowCard(t);
+}
+
+const SPEED_STEPS=[1,1.25,1.5,0.75];
+function cycleSpeed(){
+  if(!ytPlayer||typeof ytPlayer.setPlaybackRate!=='function')return;
+  const idx=SPEED_STEPS.indexOf(playbackSpeed);
+  playbackSpeed=SPEED_STEPS[(idx+1)%SPEED_STEPS.length];
+  ytPlayer.setPlaybackRate(playbackSpeed);
+  document.getElementById('speed-lbl').textContent=playbackSpeed+'x';
+  showToast('Speed: '+playbackSpeed+'x');
+}
+
+function togglePlay(){
+  if(!ytPlayer)return;
+  const st=ytPlayer.getPlayerState();
+  if(st===YT.PlayerState.PLAYING){ytPlayer.pauseVideo();}
+  else{ytPlayer.playVideo();}
+}
+function setPlayIcon(playing){
+  document.getElementById('playpause-icon').innerHTML=playing
+    ?'<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>'
+    :'<path d="M8 5v14l11-7z"/>';
+}
+
+/* ---- Mute toggle: actually mutes/unmutes the YouTube player's audio ---- */
+function toggleMute(){
+  if(!ytPlayer||typeof ytPlayer.mute!=='function')return;
+  isMuted=!isMuted;
+  if(isMuted){ytPlayer.mute();} else {ytPlayer.unMute();}
+  const icon=document.getElementById('mute-icon');
+  icon.innerHTML=isMuted
+    ?'<path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M23 9l-6 6M17 9l6 6" stroke-linecap="round"/>'
+    :'<path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M19 9a5 5 0 010 6"/>';
+  document.getElementById('btn-mute').classList.toggle('is-active',isMuted);
+  showToast(isMuted?'Muted':'Unmuted');
+}
+
+/* ---- Loop a section: jump back 15s, play that stretch once, then continue normally ---- */
+function toggleLoopSegment(){
+  if(!ytPlayer||typeof ytPlayer.getCurrentTime!=='function')return;
+  if(loopActive){
+    cancelLoopSegment();
+    return;
+  }
+  const cur=ytPlayer.getCurrentTime()||0;
+  loopEnd=cur;
+  loopStart=Math.max(0,cur-15);
+  loopActive=true;
+  document.getElementById('btn-loop').classList.add('is-active');
+  ytPlayer.seekTo(loopStart,true);
+  if(typeof ytPlayer.playVideo==='function')ytPlayer.playVideo();
+  showToast('Replaying last 15s');
+}
+function cancelLoopSegment(){
+  loopActive=false;
+  document.getElementById('btn-loop').classList.remove('is-active');
+}
+
+function exitWorkout(){
+  stopProgressLoop();
+  stopRestTimer();
+  cancelLoopSegment();
+  if(ytPlayer&&typeof ytPlayer.pauseVideo==='function')ytPlayer.pauseVideo();
+  playerExitFn();
+}
+
+/* ============================================================
+   MANUAL REST TIMER
+   — User-controlled rest: pauses the video, counts down, can be
+   extended/shortened, paused, or skipped (jumps video forward
+   past the rest with no exact YouTube timestamp detection needed).
+   ============================================================ */
+function startRest(){
+  restWasPlayingBeforeStart = ytPlayer && typeof ytPlayer.getPlayerState==='function'
+    && ytPlayer.getPlayerState()===YT.PlayerState.PLAYING;
+  if(ytPlayer&&typeof ytPlayer.pauseVideo==='function')ytPlayer.pauseVideo();
+
+  restTotal=30;
+  restRemaining=30;
+  restPaused=false;
+  document.getElementById('rest-pause-toggle').textContent='Pause timer';
+  updateRestUI();
+  document.getElementById('rest-overlay').classList.add('show');
+  runRestTimer();
+}
+
+function runRestTimer(){
+  stopRestTimer();
+  restTimerId=setInterval(()=>{
+    if(restPaused)return;
+    restRemaining--;
+    if(restRemaining<=0){
+      finishRest();
+      return;
+    }
+    updateRestUI();
+  },1000);
+}
+
+function stopRestTimer(){
+  if(restTimerId){clearInterval(restTimerId);restTimerId=null;}
+}
+
+function updateRestUI(){
+  document.getElementById('rest-num').textContent=fmtTime(restRemaining);
+  document.getElementById('rest-amt-lbl').textContent='total: '+fmtTime(restTotal);
+  const pct=restTotal>0?Math.max(0,restRemaining/restTotal):0;
+  const offset=REST_RING_CIRC*(1-pct);
+  document.getElementById('rest-ring-fg').style.strokeDashoffset=offset;
+}
+
+function adjustRest(sec){
+  restTotal=Math.max(10,restTotal+sec);
+  restRemaining=Math.max(0,restRemaining+sec);
+  updateRestUI();
+}
+
+function toggleRestPause(){
+  restPaused=!restPaused;
+  document.getElementById('rest-pause-toggle').textContent=restPaused?'Resume timer':'Pause timer';
+}
+
+function finishRest(){
+  stopRestTimer();
+  document.getElementById('rest-overlay').classList.remove('show');
+  resumeVideoPlayback();
+  showToast('Rest done — back to it!');
+}
+
+function resumeVideoPlayback(){
+  if(!ytPlayer||typeof ytPlayer.playVideo!=='function')return;
+  ytPlayer.playVideo();
+  /* YouTube's iframe API can silently drop a playVideo() call right after
+     seekTo() or while buffering — retry a couple of times to be safe. */
+  let tries=0;
+  const retry=setInterval(()=>{
+    tries++;
+    const st=ytPlayer.getPlayerState&&ytPlayer.getPlayerState();
+    if(st===YT.PlayerState.PLAYING || tries>=6){
+      clearInterval(retry);
+      return;
+    }
+    ytPlayer.playVideo();
+  },300);
+}
+
+function skipRest(){
+  stopRestTimer();
+  document.getElementById('rest-overlay').classList.remove('show');
+  /* Jump the video forward by the rest duration so the rest portion is skipped */
+  if(ytPlayer&&typeof ytPlayer.getCurrentTime==='function'){
+    const cur=ytPlayer.getCurrentTime()||0;
+    const dur=ytPlayer.getDuration()||activeDuration||0;
+    const t=Math.min(dur,cur+restTotal);
+    ytPlayer.seekTo(t,true);
+  }
+  showToast('Rest skipped');
+  /* Give the seek a brief moment to register before issuing play,
+     then resumeVideoPlayback retries in case it's still buffering. */
+  setTimeout(resumeVideoPlayback,150);
+}
+
+/* ============================================================
+   COMPLETE PAGE
+   ============================================================ */
+function completeWorkout(){
+  const key=state.planId+'_'+state.dayIdx;
+  const wasAlreadyDone=!!state.doneDays[key];
+  state.doneDays[key]=true;
+  localStorage.setItem('hb_done',JSON.stringify(state.doneDays));
+
+  const minsThis=Math.round((activeDuration||0)/60);
+
+  /* Plan is repeatable for life — every completed session counts toward
+     streak/minutes/total, even if this exact day was done before. */
+  state.completed+=1;
+  state.minutes+=minsThis;
+  const last=localStorage.getItem('hb_last_done_day');
+  const today=todayKey();
+  if(last!==today){
+    state.streak+=1;
+    localStorage.setItem('hb_last_done_day',today);
+  }
+  localStorage.setItem('hb_total',state.completed);
+  localStorage.setItem('hb_minutes',state.minutes);
+  localStorage.setItem('hb_streak',state.streak);
+
+  logWorkoutToday();
+  logSession(state.planId,minsThis);
+  renderHomeStats();
+
+  document.getElementById('complete-time').textContent=minsThis;
+  document.getElementById('complete-streak').textContent=state.streak;
+  document.getElementById('complete-cal').textContent=Math.max(40,minsThis*7);
+
+  const completeWrap=document.querySelector('#page-complete .complete-wrap');
+  completeWrap.classList.remove('animate-in');
+  void completeWrap.offsetWidth; /* restart the animation every time */
+  completeWrap.classList.add('animate-in');
+
+  goTo('page-complete');
+}
+
+/* ============================================================
+   STUDIO ASSISTANT — local Q&A chat with live web search fallback.
+   Answers three kinds of questions:
+   1) Personal / app-data questions — read live from `state`, PLANS,
+      PLAN_META and the weight log (all permanently saved locally).
+   2) General weight-loss / fitness questions — answered from a small
+      built-in knowledge base of rule-based responses.
+   3) Anything else — answered with a real-time internet search
+      (DuckDuckGo's free Instant Answer JSON API), called directly
+      from the browser with no API key and no backend server.
+   ============================================================ */
+let chatHistory=JSON.parse(localStorage.getItem('hb_chat_history')||'[]');
+let chatReturnPage='page-home';
+
+function openChat(){
+  chatReturnPage=currentPage;
+  if(chatHistory.length===0){
+    pushChatMessage('bot',"Hi! I'm your Studio Assistant. I can answer questions about your saved progress, plans and weight log in this app, or literally anything else — general knowledge, advice, you name it. You can also attach a photo (camera or gallery) or share your location for more relevant answers. What would you like to know?",false);
+  }
+  renderChatBody();
+  renderChatSuggestions();
+  goTo('page-chat');
+  setTimeout(()=>{
+    const inp=document.getElementById('chat-input');
+    if(inp)inp.focus();
+    scrollChatToBottom();
+  },380);
+}
+function closeChat(){
+  goBack(chatReturnPage);
+}
+function clearChat(){
+  if(!confirm('Clear this chat conversation? Your app progress is not affected.'))return;
+  chatHistory=[];
+  localStorage.setItem('hb_chat_history',JSON.stringify(chatHistory));
+  pushChatMessage('bot',"Chat cleared. Ask me anything about your progress, plans, or general fitness questions.",false);
+  renderChatBody();
+}
+
+function pushChatMessage(role,text,persist,source,images){
+  const msg={role,text,ts:Date.now()};
+  if(source&&source.url)msg.source=source;
+  if(images&&images.length)msg.images=images;
+  chatHistory.push(msg);
+  if(chatHistory.length>200)chatHistory=chatHistory.slice(-200);
+  if(persist!==false)localStorage.setItem('hb_chat_history',JSON.stringify(chatHistory));
+}
+
+function renderChatBody(){
+  const body=document.getElementById('chat-body');
+  if(!body)return;
+  body.innerHTML=chatHistory.map(m=>{
+    const imgsHtml=(m.images&&m.images.length)
+      ?m.images.map(src=>`<img class="chat-img-msg" src="${src}">`).join('')
+      :'';
+    if(m.role==='bot'){
+      const srcHtml=(m.source&&m.source.url)
+        ?`<a class="chat-source-link" href="${escapeHtml(m.source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(m.source.label||'View source')} ↗</a>`
+        :'';
+      return `<div class="chat-msg bot">
+        <div class="avatar-chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 2a4 4 0 014 4v1a4 4 0 01-8 0V6a4 4 0 014-4z"/><path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg></div>
+        <div class="chat-bubble">${imgsHtml}${escapeHtml(m.text)}${srcHtml}</div>
+      </div>`;
+    }
+    return `<div class="chat-msg user"><div class="chat-bubble">${imgsHtml}${escapeHtml(m.text)}</div></div>`;
+  }).join('');
+  scrollChatToBottom();
+}
+function scrollChatToBottom(){
+  const page=document.getElementById('page-chat');
+  if(page)page.scrollTop=page.scrollHeight;
+}
+function escapeHtml(s){
+  const d=document.createElement('div');
+  d.textContent=s;
+  return d.innerHTML;
+}
+
+const CHAT_SUGGESTIONS=[
+  "How many workouts have I done?",
+  "What's my current streak?",
+  "Show my weight progress",
+  "Which plans have I started?",
+  "What are my favorites?",
+  "Tips for weight loss",
+  "How many calories should I eat?",
+  "Is it normal to feel sore?"
+];
+function renderChatSuggestions(){
+  const row=document.getElementById('chat-suggest-row');
+  if(!row)return;
+  row.innerHTML=CHAT_SUGGESTIONS.map(q=>`<div class="chat-suggest-chip" onclick="askChatSuggestion(this)">${escapeHtml(q)}</div>`).join('');
+}
+function askChatSuggestion(el){
+  const q=el.textContent;
+  document.getElementById('chat-input').value=q;
+  sendChatMessage();
+}
+
+/* Pending state for the chat composer — images staged before send,
+   and whether the user has shared their location for this session. */
+let pendingChatImages=[];
+let chatLocation=null; /* {lat,lon,label} once granted, else null */
+
+function handleChatFileSelect(fileList){
+  const files=Array.from(fileList||[]).slice(0,4-pendingChatImages.length);
+  files.forEach(file=>{
+    if(!file.type.startsWith('image/'))return;
+    const reader=new FileReader();
+    reader.onload=e=>{
+      pendingChatImages.push(e.target.result);
+      renderAttachPreview();
+    };
+    reader.readAsDataURL(file);
+  });
+  document.getElementById('chat-file-input').value='';
+}
+function renderAttachPreview(){
+  const wrap=document.getElementById('chat-attach-preview');
+  if(!wrap)return;
+  wrap.innerHTML=pendingChatImages.map((src,i)=>`
+    <div class="chat-attach-chip">
+      <img src="${src}">
+      <div class="remove-att" onclick="removeAttachedImage(${i})">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </div>
+    </div>`).join('');
+}
+function removeAttachedImage(i){
+  pendingChatImages.splice(i,1);
+  renderAttachPreview();
+}
+
+/* Browser geolocation only — this is a webpage, not an installed
+   native app, so it can request the standard browser location
+   permission (same dialog Maps-in-browser uses) but cannot show or
+   manage Android's per-app permissions screen for other apps. Once
+   granted, a short place label is reverse-geocoded with a free,
+   key-less API and folded into the AI context, e.g. for "gyms near
+   me" style questions. */
+function toggleChatLocation(){
+  if(chatLocation){
+    chatLocation=null;
+    const btn=document.getElementById('chat-location-btn');
+    if(btn)btn.classList.remove('is-on');
+    renderPermissions();
+    showToast('Location turned off for this chat');
+    return;
+  }
+  requestLocation();
+}
+
+/* ============================================================
+   PERMISSIONS (Profile page) — browser-native, no API key.
+   A webpage can't show or manage Android's per-app permissions
+   screen for other apps (only an installed native app can). What it
+   CAN do — and what these toggles drive — is request the browser's
+   own standard permission prompts for this site: Location, Camera,
+   Microphone, and Notifications. Status is checked live with the
+   Permissions API where the browser supports it, so the toggle
+   reflects "granted / denied / not asked yet" accurately.
+   ============================================================ */
+let micStream=null; /* kept while mic permission is active, for the toggle-off case */
+
+async function getPermissionState(name){
+  try{
+    if(navigator.permissions && navigator.permissions.query){
+      const status=await navigator.permissions.query({name});
+      return status.state; // 'granted' | 'denied' | 'prompt'
+    }
+  }catch(e){ /* some browsers don't support querying this permission name */ }
+  return 'unknown';
+}
+
+async function renderPermissions(){
+  const locState=chatLocation?'granted':await getPermissionState('geolocation');
+  setPermRow('location',locState,chatLocation?chatLocation.label:null);
+
+  const camState=await getPermissionState('camera');
+  setPermRow('camera',camState);
+
+  const micState=micStream?'granted':await getPermissionState('microphone');
+  setPermRow('microphone',micState);
+
+  const notifState=('Notification' in window)?Notification.permission.replace('default','prompt'):'unknown';
+  setPermRow('notifications',notifState);
+}
+function setPermRow(key,state,extraLabel){
+  const toggle=document.getElementById('perm-toggle-'+key);
+  const sub=document.getElementById('perm-sub-'+key);
+  if(!toggle)return;
+  toggle.classList.remove('is-on','is-denied');
+  const defaults={
+    location:'Used by the AI chat for nearby suggestions',
+    camera:'For profile photo and AI photo questions',
+    microphone:'For voice questions to the AI chat',
+    notifications:'For workout and streak reminders'
+  };
+  if(state==='granted'){
+    toggle.classList.add('is-on');
+    if(sub)sub.textContent=extraLabel?('On · '+extraLabel):'Allowed for this app';
+  }else if(state==='denied'){
+    toggle.classList.add('is-denied');
+    if(sub)sub.textContent='Blocked — enable it in your browser site settings';
+  }else{
+    if(sub)sub.textContent=defaults[key];
+  }
+}
+
+function togglePermission(key){
+  const toggle=document.getElementById('perm-toggle-'+key);
+  const isOn=toggle&&toggle.classList.contains('is-on');
+
+  if(key==='location'){
+    if(isOn){chatLocation=null;const b=document.getElementById('chat-location-btn');if(b)b.classList.remove('is-on');renderPermissions();showToast('Location turned off');return;}
+    requestLocation();
+    return;
+  }
+
+  if(key==='camera'){
+    if(isOn){showToast('To revoke camera access, use your browser\'s site settings');return;}
+    navigator.mediaDevices?.getUserMedia({video:true})
+      .then(stream=>{ stream.getTracks().forEach(t=>t.stop()); showToast('Camera access granted'); renderPermissions(); })
+      .catch(()=>{ showToast('Camera permission denied'); renderPermissions(); });
+    return;
+  }
+
+  if(key==='microphone'){
+    if(isOn){
+      if(micStream){micStream.getTracks().forEach(t=>t.stop());micStream=null;}
+      showToast('Microphone turned off for this session');
+      renderPermissions();
+      return;
+    }
+    navigator.mediaDevices?.getUserMedia({audio:true})
+      .then(stream=>{ micStream=stream; showToast('Microphone access granted'); renderPermissions(); })
+      .catch(()=>{ showToast('Microphone permission denied'); renderPermissions(); });
+    return;
+  }
+
+  if(key==='notifications'){
+    if(!('Notification' in window)){showToast('Notifications are not supported in this browser');return;}
+    if(isOn){showToast('To turn off notifications, use your browser\'s site settings');return;}
+    Notification.requestPermission().then(()=>{ renderPermissions(); });
+    return;
+  }
+}
+
+/* ============================================================
+   SERVICE WORKER — inline via Blob URL
+   Works locally (file://) AND on Netlify/GitHub Pages (https://)
+   ============================================================ */
+let swReg=null;
+
+const SW_CODE=`
+const NOTIF_ICON='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Herbalife_logo.svg/120px-Herbalife_logo.svg.png';
+
+self.addEventListener('install',()=>self.skipWaiting());
+self.addEventListener('activate',e=>e.waitUntil(clients.claim()));
+
+self._notifSchedule=null;
+self._notifLoopId=null;
+self._lastNotifDate=null;
+
+self.addEventListener('message',e=>{
+  if(!e.data)return;
+  if(e.data.type==='SCHEDULE_NOTIFICATION'){
+    self._notifSchedule={time:e.data.time,freq:e.data.freq,days:e.data.days};
+    startLoop();
+  }
+  if(e.data.type==='CANCEL_NOTIFICATION'){
+    self._notifSchedule=null;
+    if(self._notifLoopId){clearInterval(self._notifLoopId);self._notifLoopId=null;}
+  }
+  if(e.data.type==='TEST_NOTIFICATION'){
+    self.registration.showNotification('Smart Wellness Studio ✅',{
+      body:e.data.body||'Reminder saved! You will be notified at your chosen time.',
+      icon:NOTIF_ICON,vibrate:[200,100,200]
+    });
+  }
+});
+
+self.addEventListener('notificationclick',e=>{
+  e.notification.close();
+  e.waitUntil(clients.matchAll({type:'window',includeUncontrolled:true}).then(list=>{
+    for(const c of list){if(c.url&&c.focus)return c.focus();}
+    return clients.openWindow('/');
+  }));
+});
+
+function startLoop(){
+  if(self._notifLoopId)clearInterval(self._notifLoopId);
+  self._notifLoopId=setInterval(()=>{
+    const s=self._notifSchedule;
+    if(!s)return;
+    const now=new Date();
+    const todayKey=now.toDateString();
+    const [hh,mm]=(s.time||'08:00').split(':').map(Number);
+    if(now.getHours()!==hh||now.getMinutes()!==mm)return;
+    if(self._lastNotifDate===todayKey)return;
+    const dow=now.getDay();
+    let ok=false;
+    if(s.freq==='daily')ok=true;
+    else if(s.freq==='weekdays')ok=dow>=1&&dow<=5;
+    else if(s.freq==='custom')ok=(s.days||[]).includes(dow);
+    if(!ok)return;
+    self._lastNotifDate=todayKey;
+    self.registration.showNotification('Smart Wellness Studio 💪',{
+      body:"Time for today\\'s workout! Keep your streak alive 🔥",
+      icon:NOTIF_ICON,tag:'hb-daily',renotify:true,vibrate:[200,100,200]
+    });
+  },60000);
+}
+`;
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    try{
+      const blob=new Blob([SW_CODE],{type:'application/javascript'});
+      const swUrl=URL.createObjectURL(blob);
+      navigator.serviceWorker.register(swUrl,{scope:'./'}).then(reg=>{
+        swReg=reg;
+        const saved=getNotifSchedule();
+        if(saved&&Notification.permission==='granted'){
+          // Wait for SW to activate then send schedule
+          const doSend=()=>sendScheduleToSW(saved);
+          if(reg.active) doSend();
+          else{
+            const sw=reg.installing||reg.waiting;
+            if(sw) sw.addEventListener('statechange',function(){if(this.state==='activated')doSend();});
+          }
+        }
+      }).catch(err=>{
+        // Blob SW failed (some strict browsers) — fallback: use setInterval in main thread
+        console.warn('SW via Blob failed, using main-thread fallback:',err);
+        startMainThreadNotifLoop();
+      });
+    }catch(e){
+      startMainThreadNotifLoop();
+    }
+  });
+} else {
+  // No SW support at all — main thread fallback
+  window.addEventListener('load', startMainThreadNotifLoop);
+}
+
+/* Main-thread fallback for browsers that block Blob SW (e.g. file://) */
+function startMainThreadNotifLoop(){
+  setInterval(()=>{
+    const s=getNotifSchedule();
+    if(!s||Notification.permission!=='granted')return;
+    const now=new Date();
+    const todayKey=now.toDateString();
+    if(window._lastMainNotifDate===todayKey)return;
+    const [hh,mm]=(s.time||'08:00').split(':').map(Number);
+    if(now.getHours()!==hh||now.getMinutes()!==mm)return;
+    const dow=now.getDay();
+    let ok=false;
+    if(s.freq==='daily')ok=true;
+    else if(s.freq==='weekdays')ok=dow>=1&&dow<=5;
+    else if(s.freq==='custom')ok=(s.days||[]).includes(dow);
+    if(!ok)return;
+    window._lastMainNotifDate=todayKey;
+    try{new Notification('Smart Wellness Studio 💪',{body:"Time for today's workout! Keep your streak alive 🔥"});}catch(e){}
+  },60000);
+}
+
+function sendScheduleToSW(schedule){
+  if(!swReg)return;
+  const sw=swReg.active||swReg.installing||swReg.waiting;
+  if(sw){
+    sw.postMessage({type:'SCHEDULE_NOTIFICATION',...schedule,label:fmtNotifLabel(schedule)});
+  }
+}
+function cancelScheduleInSW(){
+  if(!swReg)return;
+  const sw=swReg.active||swReg.installing||swReg.waiting;
+  if(sw) sw.postMessage({type:'CANCEL_NOTIFICATION'});
+}
+function sendTestToSW(body){
+  if(!swReg)return;
+  const sw=swReg.active||swReg.installing||swReg.waiting;
+  if(sw) sw.postMessage({type:'TEST_NOTIFICATION',body});
+}
+
+/* ============================================================
+   NOTIFICATION SCHEDULE — time, frequency, days picker
+   ============================================================ */
+let notifPanelOpen=false;
+let notifFreq='daily'; // 'daily' | 'weekdays' | 'custom'
+let notifDays=[0,1,2,3,4,5,6]; // selected days for custom
+
+function getNotifSchedule(){
+  try{return JSON.parse(localStorage.getItem('hb_notif_schedule')||'null');}catch(e){return null;}
+}
+function saveNotifScheduleToStorage(obj){
+  localStorage.setItem('hb_notif_schedule',JSON.stringify(obj));
+}
+
+function toggleNotifPanel(){
+  const panel=document.getElementById('notif-panel');
+  const chevron=document.getElementById('notif-chevron');
+  notifPanelOpen=!notifPanelOpen;
+  panel.classList.toggle('open',notifPanelOpen);
+  if(chevron)chevron.style.transform=notifPanelOpen?'rotate(180deg)':'rotate(0deg)';
+  if(notifPanelOpen) restoreNotifPanel();
+}
+
+function restoreNotifPanel(){
+  const saved=getNotifSchedule();
+  if(!saved)return;
+  const ti=document.getElementById('notif-time-input');
+  if(ti&&saved.time)ti.value=saved.time;
+  if(saved.freq){
+    notifFreq=saved.freq;
+    selectFreq(saved.freq,true);
+  }
+  if(saved.days)notifDays=saved.days;
+  refreshDayBtns();
+}
+
+function selectFreq(freq,silent){
+  notifFreq=freq;
+  ['daily','custom','weekdays'].forEach(f=>{
+    const el=document.getElementById('nfreq-'+f);
+    if(el)el.classList.toggle('sel',f===freq);
+  });
+  const wrap=document.getElementById('notif-days-wrap');
+  if(wrap)wrap.style.display=(freq==='custom')?'block':'none';
+  if(!silent){
+    if(freq==='daily') notifDays=[0,1,2,3,4,5,6];
+    if(freq==='weekdays') notifDays=[1,2,3,4,5];
+    refreshDayBtns();
+  }
+}
+
+function toggleNotifDay(btn){
+  const day=parseInt(btn.dataset.day);
+  if(notifDays.includes(day)){
+    if(notifDays.length===1){showToast('At least one day must be selected');return;}
+    notifDays=notifDays.filter(d=>d!==day);
+  } else {
+    notifDays.push(day);
+  }
+  refreshDayBtns();
+}
+
+function refreshDayBtns(){
+  document.querySelectorAll('.notif-day-btn').forEach(btn=>{
+    const d=parseInt(btn.dataset.day);
+    btn.classList.toggle('sel',notifDays.includes(d));
+  });
+}
+
+function saveNotifSchedule(){
+  if(!('Notification' in window)){showToast('Notifications not supported in this browser');return;}
+  const time=document.getElementById('notif-time-input').value||'08:00';
+  const schedule={time,freq:notifFreq,days:notifDays};
+
+  const doSave=()=>{
+    saveNotifScheduleToStorage(schedule);
+    sendScheduleToSW(schedule);
+    // Send immediate test notification as confirmation
+    setTimeout(()=>sendTestToSW('Reminder set for '+fmtNotifLabel(schedule)+' ✅'),800);
+    showToast('Reminder saved: '+fmtNotifLabel(schedule));
+    updateNotifSubLabel(schedule);
+    renderPermissions();
+  };
+
+  if(Notification.permission==='default'){
+    Notification.requestPermission().then(perm=>{
+      if(perm==='granted'){
+        doSave();
+      } else {
+        showToast('Notification permission denied');
+        renderPermissions();
+      }
+    });
+  } else if(Notification.permission==='granted'){
+    doSave();
+  } else {
+    showToast('Notifications blocked — enable in browser settings');
+  }
+}
+
+function fmtNotifLabel(s){
+  const [h,m]=s.time.split(':');
+  const hNum=parseInt(h),suffix=hNum>=12?'PM':'AM';
+  const h12=hNum%12||12;
+  const timeStr=h12+':'+(m||'00')+' '+suffix;
+  let dayStr='';
+  if(s.freq==='daily') dayStr='Every day';
+  else if(s.freq==='weekdays') dayStr='Mon–Fri';
+  else{
+    const names=['Su','Mo','Tu','We','Th','Fr','Sa'];
+    dayStr=(s.days||[]).map(d=>names[d]).join(', ');
+  }
+  return timeStr+' · '+dayStr;
+}
+
+function updateNotifSubLabel(schedule){
+  const sub=document.getElementById('perm-sub-notifications');
+  if(!sub)return;
+  if(Notification.permission==='granted'&&schedule){
+    sub.textContent='On · '+fmtNotifLabel(schedule);
+  }
+}
+
+/* Shared geolocation request, used by both the chat location button
+   and the Profile > Permissions toggle, so the two stay in sync.
+   Browser-level geolocation only — this is a webpage, not an
+   installed native app, so it shows the standard browser location
+   prompt (same one Maps-in-browser uses) rather than Android's
+   system permissions screen. */
+function requestLocation(){
+  if(!navigator.geolocation){
+    showToast('Location is not available in this browser');
+    return;
+  }
+  showToast('Requesting location…');
+  navigator.geolocation.getCurrentPosition(async pos=>{
+    const lat=pos.coords.latitude,lon=pos.coords.longitude;
+    chatLocation={lat,lon,label:`${lat.toFixed(3)}, ${lon.toFixed(3)}`};
+    const chatBtn=document.getElementById('chat-location-btn');
+    if(chatBtn)chatBtn.classList.add('is-on');
+    renderPermissions();
+    try{
+      const url=`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=12`;
+      const res=await fetch(url,{headers:{'Accept':'application/json'}});
+      if(res.ok){
+        const data=await res.json();
+        const a=data.address||{};
+        const label=[a.suburb||a.neighbourhood||a.city_district,a.city||a.town||a.village,a.state].filter(Boolean).join(', ');
+        if(label)chatLocation.label=label;
+      }
+    }catch(e){ /* keep raw coordinates as the label */ }
+    renderPermissions();
+    showToast('Location added: '+chatLocation.label);
+  },err=>{
+    showToast('Location permission denied');
+    renderPermissions();
+  },{enableHighAccuracy:false,timeout:8000});
+}
+
+function sendChatMessage(){
+  const input=document.getElementById('chat-input');
+  const text=input.value.trim();
+  const images=pendingChatImages.slice();
+  if(!text && images.length===0)return;
+
+  pushChatMessage('user',text||'(photo)',true,null,images);
+  renderChatBody();
+  input.value='';
+  pendingChatImages=[];
+  renderAttachPreview();
+
+  const body=document.getElementById('chat-body');
+  const typingEl=document.createElement('div');
+  typingEl.className='chat-msg bot';
+  typingEl.id='chat-typing-indicator';
+  typingEl.innerHTML=`<div class="avatar-chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 2a4 4 0 014 4v1a4 4 0 01-8 0V6a4 4 0 014-4z"/><path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg></div><div class="chat-bubble"><div class="chat-typing"><span></span><span></span><span></span></div></div>`;
+  body.appendChild(typingEl);
+  scrollChatToBottom();
+
+  const minDelay=420+Math.min(500,text.length*8);
+  const started=Date.now();
+
+  answerChatQuery(text,images).then(reply=>{
+    const wait=Math.max(0,minDelay-(Date.now()-started));
+    setTimeout(()=>{
+      const t=document.getElementById('chat-typing-indicator');
+      if(t)t.remove();
+      pushChatMessage('bot',reply.text,true,reply.source);
+      renderChatBody();
+    },wait);
+  });
+}
+
+/* ---- Core intent router ----
+   1) App-data questions (progress, streak, weight log, favorites…)
+   2) Local built-in fitness knowledge base
+   3) Anything else — including questions with an attached photo —
+      gets a direct AI-generated answer (Google AI-Mode style) that
+      blends the user's own saved data (and shared location, if any)
+      with general knowledge, instead of just listing search results.
+      Image questions skip straight to the AI step since there's no
+      app-data or local-KB answer for "what is this food". */
+async function answerChatQuery(raw,images){
+  const q=raw.toLowerCase().trim();
+  images=images||[];
+
+  if(images.length===0){
+    const appAnswer=tryAnswerFromAppData(q);
+    if(appAnswer)return {text:appAnswer};
+
+    const kbAnswer=tryAnswerFromKnowledgeBase(q);
+    if(kbAnswer)return {text:kbAnswer};
+  }
+
+  const aiAnswer=await tryAnswerFromAI(raw,images);
+  if(aiAnswer)return aiAnswer;
+
+  return {text:"I couldn't find a clear answer for that — even after checking the web. I can answer questions about your saved progress, streak, minutes, plans, favorites and weight log in this app, general fitness questions, or anything else you'd like to ask. Try rephrasing your question?"};
+}
+
+/* ---- Build a rich, analytical summary of the user's own
+   permanently-saved data — not just raw numbers, but a few derived
+   insights (completion rate, recent activity pattern, weight trend
+   direction, favorite category) — plus their shared location for
+   this chat session, if any. This is folded into the AI prompt for
+   every open-ended question, so answers are genuinely personalized
+   ("based on your data, here's what fits you") rather than generic.
+   It's sent only as plain text inside the public, key-less AI
+   request the browser itself makes — there is no external account,
+   server or analytics involved. The user can erase the app data any
+   time from Profile > Data, and can turn location off any time with
+   the location toggle in chat or Profile > Permissions. ---- */
+function buildUserContext(){
+  const ctx=[];
+  const p=state.profile||{};
+  if(p.name)ctx.push(`Their name: ${p.name}.`);
+  if(p.details)ctx.push(`Their saved goal/notes: "${p.details}".`);
+
+  const startedIds=Object.keys(PLANS).filter(id=>{
+    const s=planProgressStats(id);
+    return s.sessionsCount>0||Object.keys(state.doneDays).some(k=>k.startsWith(id+'_'));
+  });
+  if(startedIds.length){
+    const details=startedIds.map(id=>{
+      const s=planProgressStats(id);
+      return `${PLANS[id].title} (${s.done}/${s.total} days done, ${s.pct}%)`;
+    });
+    ctx.push(`Plans in progress: ${details.join('; ')}.`);
+  }else{
+    ctx.push(`They haven't started any plan yet.`);
+  }
+
+  if(state.streak>0){
+    ctx.push(`Current streak: ${state.streak} day${state.streak===1?'':'s'}, weekly goal ${state.goal} workouts.`);
+  }else{
+    ctx.push(`No active streak right now (weekly goal: ${state.goal} workouts).`);
+  }
+  ctx.push(`Total lifetime workouts completed: ${state.completed}, total minutes: ${state.minutes}.`);
+
+  const log=getWeightLog();
+  if(log.length){
+    const first=log[0],last=log[log.length-1];
+    const diff=+(last.value-first.value).toFixed(1);
+    if(log.length>1 && diff!==0){
+      ctx.push(`Weight trend: ${diff<0?'down':'up'} ${Math.abs(diff)} kg since their first entry, latest ${last.value} kg across ${log.length} logged entries.`);
+    }else{
+      ctx.push(`Latest logged weight: ${last.value} kg (${log.length} entr${log.length===1?'y':'ies'} logged).`);
+    }
+  }else{
+    ctx.push(`No weight entries logged yet.`);
+  }
+
+  const favCount=Object.keys(state.favs||{}).length;
+  if(favCount)ctx.push(`${favCount} favorite${favCount===1?'':'s'} saved.`);
+
+  if(chatLocation)ctx.push(`Their shared location: ${chatLocation.label}.`);
+
+  return ctx.join(' ');
+}
+
+/* ---- AI-mode answer, no API key required ----
+   Handles ANY question — fitness-related or completely general
+   knowledge/current-events/advice — the same way Google's AI Mode
+   gives one direct written answer instead of a list of links.
+
+   Two upgrades over a plain one-shot prompt:
+   1) Memory — the last few turns of this chat are included, so
+      follow-up questions ("and what about tomorrow?") are
+      understood in context instead of treated as a fresh question.
+   2) Deep personalization — buildUserContext() now includes derived
+      insights (per-plan completion %, streak vs weekly goal, weight
+      trend, favorites count), not just raw fields, so the model can
+      reason about the user's actual situation rather than recite
+      numbers back.
+
+   Sent to a free, key-less AI endpoint (text.pollinations.ai for
+   text-only, or its OpenAI-compatible POST endpoint with image
+   content for photo questions) called directly from the browser —
+   no backend, no signup, no API key anywhere. A "Powered by" note
+   with a Google-search link is shown underneath as the source. */
+async function tryAnswerFromAI(rawQuery,images){
+  const query=rawQuery.trim();
+  images=images||[];
+  if(!query && images.length===0)return null;
+
+  const context=buildUserContext();
+  const googleUrl='https://www.google.com/search?q='+encodeURIComponent(query||'photo question');
+
+  const systemPrompt="You are the Studio Assistant inside a fitness app, but you can answer absolutely any question — fitness-related or general knowledge, current events, advice, anything. Answer directly and conversationally, in 2-5 short sentences. You are given the user's real saved app data below — analyze it and use it whenever it's relevant to give a specific, personalized answer (e.g. suggest something that actually fits their current plan, streak or weight trend) instead of generic advice; ignore the app data only when the question is clearly unrelated to it. Never invent app data that wasn't given. Use the recent conversation history to understand follow-up questions in context. If a photo is attached, look at it and answer based on what's actually in it. Don't repeat the question back, don't add headers or bullet lists, just answer plainly.";
+
+  /* Last few turns of real conversation, for memory/follow-ups. */
+  const recentHistory=chatHistory.slice(-7,-1).filter(m=>m.text).map(m=>({
+    role:m.role==='bot'?'assistant':'user',
+    content:m.text
+  }));
+
+  try{
+    let answer='';
+
+    if(images.length>0){
+      /* Vision request: Pollinations' OpenAI-compatible chat endpoint,
+         called directly with fetch — free, key-less, no backend. */
+      const content=[{type:'text',text:(context?("App data about this user: "+context+'\n\n'):'')+"User's question: "+(query||"(See attached photo. Describe it and answer anything relevant — e.g. if it's food, comment on it; if it's an exercise or form photo, comment on that.)")}];
+      images.slice(0,4).forEach(src=>content.push({type:'image_url',image_url:{url:src}}));
+      const res=await fetch('https://text.pollinations.ai/openai',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          model:'openai',
+          messages:[
+            {role:'system',content:systemPrompt},
+            ...recentHistory,
+            {role:'user',content:content}
+          ]
+        })
+      });
+      if(!res.ok)throw new Error('ai-vision-network');
+      const data=await res.json();
+      answer=(data.choices?.[0]?.message?.content||'').trim();
+    }else{
+      const userText=(context?("App data about this user: "+context+'\n\n'):'')+"User's question: "+query;
+      const res=await fetch('https://text.pollinations.ai/openai',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          model:'openai',
+          messages:[
+            {role:'system',content:systemPrompt},
+            ...recentHistory,
+            {role:'user',content:userText}
+          ]
+        })
+      });
+      if(!res.ok)throw new Error('ai-network');
+      const data=await res.json();
+      answer=(data.choices?.[0]?.message?.content||'').trim();
+    }
+
+    /* Defensive cleanup in case the endpoint wraps output in quotes
+       or stray markdown fences. */
+    answer=answer.replace(/^```[a-z]*\n?/i,'').replace(/```$/,'').trim();
+    answer=answer.replace(/^"+|"+$/g,'').trim();
+
+    if(answer){
+      return {
+        text:answer,
+        source:{label:'Powered by AI search — view on Google',url:googleUrl}
+      };
+    }
+  }catch(e){ /* fall through to final fallback */ }
+
+  return {
+    text:"I wasn't able to reach the AI search service just now. Tap below to search it on Google directly.",
+    source:{label:'Search on Google',url:googleUrl}
+  };
+}
+
+function has(q,words){return words.some(w=>q.includes(w));}
+
+/* ---- App-data answers: everything here reads live, permanently
+   saved data from `state`, PLANS and the weight log. ---- */
+function tryAnswerFromAppData(q){
+  const totalPlans=Object.keys(PLANS).length;
+  const startedPlans=Object.keys(PLANS).filter(id=>{
+    const s=planProgressStats(id);
+    return s.sessionsCount>0||Object.keys(state.doneDays).some(k=>k.startsWith(id+'_'));
+  });
+
+  /* Streak */
+  if(has(q,['streak'])){
+    if(state.streak<=0)return "You don't have an active streak yet. Complete a workout today to start one — it counts once per day, no matter which plan or video you choose.";
+    return `Your current streak is ${state.streak} day${state.streak===1?'':'s'}. Your weekly goal is set to ${state.goal} workout${state.goal===1?'':'s'} per week — keep showing up to extend it!`;
+  }
+
+  /* Total workouts / sessions completed */
+  if(has(q,['how many workout','workouts have i','total workout','sessions have i','how many session','number of workout'])){
+    if(state.completed<=0)return "You haven't logged a completed workout yet. Once you finish a video and it ends, tap through to mark it done and it'll show up here.";
+    return `You've completed ${state.completed} workout${state.completed===1?'':'s'} so far, totalling ${state.minutes} minute${state.minutes===1?'':'s'} of exercise. ${startedPlans.length} of ${totalPlans} plan${totalPlans===1?'':'s'} have at least one session logged.`;
+  }
+
+  /* Total minutes */
+  if(has(q,['how many minute','total minute','time spent','time i\'ve spent','time have i spent'])){
+    return `You've spent ${state.minutes} minute${state.minutes===1?'':'s'} working out in total across ${state.completed} session${state.completed===1?'':'s'}.`;
+  }
+
+  /* Weekly goal */
+  if(has(q,['weekly goal','my goal','workouts per week'])){
+    return `Your weekly goal is currently set to ${state.goal} workout${state.goal===1?'':'s'} per week. You can change it any time from the Profile page under "Weekly goal".`;
+  }
+
+  /* Specific plan progress, e.g. "how is women10 going", "progress on 10-day challenge for men" */
+  const planMatch=matchPlanFromText(q);
+  if(planMatch && has(q,['progress','how much','how far','done','complete','status'])){
+    const s=planProgressStats(planMatch);
+    return `On "${s.plan.title}" (${s.plan.tag}) you've completed ${s.done} of ${s.total} day${s.total===1?'':'s'} — that's ${s.pct}%, across ${s.sessionsCount} session${s.sessionsCount===1?'':'s'}. Open the Progress tab and tap this plan's bar to see a full downloadable report.`;
+  }
+
+  /* Plan recommendation — checked before the broader "which plans
+     started" matcher below, since phrases like "which plan should I
+     start" are a recommendation request, not a progress lookup. */
+  if(has(q,['which plan should i','recommend a plan','what should i start','where do i start','which program is best for me','which plan is best'])){
+    return "If you're new, the 10-Day Challenge (women's or men's track) is a good structured start — a fresh video each day for 10 days. If you'd rather repeat the same routine daily, the 2-Week Plan is built for that. There's also a standalone Yoga session and a Quick Sessions Library for shorter HIIT, core and stretch videos whenever you're short on time.";
+  }
+
+  /* Which plans started / list plans */
+  if(has(q,['which plan','what plan','plans have i','list plan','show plan','my plans','what programs','which programs'])){
+    if(startedPlans.length===0)return `You haven't started any plan yet. There are ${totalPlans} available: ${Object.values(PLAN_META).map(p=>p.title+' ('+p.tag+')').join(', ')}.`;
+    const lines=startedPlans.map(id=>{
+      const s=planProgressStats(id);
+      return `• ${s.plan.title} (${s.plan.tag}) — ${s.pct}% done`;
+    });
+    return `You've made progress on ${startedPlans.length} plan${startedPlans.length===1?'':'s'}:\n${lines.join('\n')}`;
+  }
+
+  /* List all available plans / what's in the app */
+  if(has(q,['what plans are there','all plans','available plan','how many plans','programs are available'])){
+    const lines=Object.values(PLAN_META).map(p=>`• ${p.title} (${p.tag}) — ${PLANS[Object.keys(PLAN_META).find(k=>PLAN_META[k]===p)]?.days.length||''} day(s)`);
+    return `There are ${totalPlans} programs in the app:\n${Object.values(PLAN_META).map(p=>'• '+p.title+' ('+p.tag+')').join('\n')}`;
+  }
+
+  /* Favorites */
+  if(has(q,['favorite','favourites','saved video','saved workout'])){
+    const favKeys=Object.keys(state.favs);
+    if(favKeys.length===0)return "You don't have any favorites saved yet. Open any day or session and tap \"Add to favorites\" to save it for quick access from the Progress tab.";
+    const names=favKeys.map(key=>{
+      if(key.startsWith('lifetime_')){
+        const planId=key.slice('lifetime_'.length);
+        return PLANS[planId]?PLANS[planId].title:null;
+      }
+      const [planId,idxStr]=key.split('_');
+      const idx=parseInt(idxStr);
+      return PLANS[planId]&&PLANS[planId].days[idx]?PLANS[planId].days[idx].title:null;
+    }).filter(Boolean);
+    return `You have ${favKeys.length} favorite${favKeys.length===1?'':'s'} saved: ${names.join(', ')}.`;
+  }
+
+  /* Weight log — require a clear personal-data signal so generic
+     questions like "tips for weight loss" fall through to the
+     knowledge base instead of being misread as a tracker lookup. */
+  if(has(q,['my weight','weight tracker','weight log','logged weight','how much do i weigh','weigh in','weigh-in'])
+     || (has(q,['weight'])&&has(q,['progress','trend','history','entries','entry','kg']))){
+    const log=getWeightLog();
+    if(log.length===0)return "You haven't logged any weight entries yet. Open the Tracker tab and log your first entry to start tracking your trend over time.";
+    const first=log[0],last=log[log.length-1];
+    const diff=+(last.value-first.value).toFixed(1);
+    const trendWord=diff<0?'down':diff>0?'up':'unchanged';
+    let msg=`Your latest logged weight is ${last.value} kg (logged ${last.label}). You have ${log.length} entr${log.length===1?'y':'ies'} total.`;
+    if(log.length>1)msg+=` Since your first entry (${first.value} kg), you're ${trendWord}${diff!==0?' '+Math.abs(diff)+' kg':''}.`;
+    return msg;
+  }
+
+  /* Profile info */
+  if(has(q,['my name','who am i','my profile','my details','about me'])){
+    const p=state.profile||{};
+    if(!p.name&&!p.details)return "You haven't added your name or details yet. Go to the Profile page to add a name, photo and a short note about your goals — it's saved permanently on this device.";
+    let msg='';
+    if(p.name)msg+=`Your saved name is "${p.name}". `;
+    if(p.details)msg+=`Your goals note: "${p.details}".`;
+    return msg.trim();
+  }
+
+  /* Day-count / what's in a specific plan */
+  if(planMatch && has(q,['how many day','how many video','videos in','days in'])){
+    const plan=PLANS[planMatch];
+    return `"${plan.title}" has ${plan.days.length} video${plan.days.length===1?'':'s'}: ${plan.days.map(d=>d.title).join(', ')}.`;
+  }
+
+  /* General "what is this app" */
+  if(has(q,['what is this app','what does this app do','what can you do','what can this app do','help me with this app','what is smart wellness'])){
+    return "This is the Herbalife Smart Wellness Studio — a video workout app with 10-day challenges for women and men, 2-week repeatable plans, a yoga session, and a quick-sessions library. It tracks your streak, completed workouts, minutes, favorites and weight log, all saved on this device. I can answer questions about any of that, or literally any other question — attach a photo or share your location for more relevant answers too.";
+  }
+
+  /* Reset / data questions */
+  if(has(q,['reset my progress','delete my data','clear my data','how do i reset'])){
+    return "You can reset your progress from the Profile page — scroll to \"Data\" and tap \"Reset all progress\". This clears your streak, workout history, favorites and weight log, but keeps your name, photo and details.";
+  }
+
+  return null;
+}
+
+/* Try to find a plan the user is referring to by name/keywords in their question */
+function matchPlanFromText(q){
+  const checks=[
+    {id:'women10',words:['women 10','women\'s 10','10 day','10-day','10day','women 10-day','women challenge']},
+    {id:'men10',words:['men 10','men\'s 10']},
+    {id:'women_lifetime',words:['women 2 week','women 2-week','women lifetime','women plan']},
+    {id:'men_lifetime',words:['men 2 week','men 2-week','men lifetime','men plan']},
+    {id:'yoga',words:['yoga']},
+    {id:'extras',words:['extra','quick session','library','hiit']}
+  ];
+  for(const c of checks){
+    if(has(q,c.words))return c.id;
+  }
+  if(has(q,['10 day','10-day','challenge'])){
+    if(has(q,['women','woman','female']))return 'women10';
+    if(has(q,['men','man','male']))return 'men10';
+  }
+  if(has(q,['2 week','2-week','two week'])){
+    if(has(q,['women','woman','female']))return 'women_lifetime';
+    if(has(q,['men','man','male']))return 'men_lifetime';
+  }
+  return null;
+}
+
+/* ---- General fitness / weight-loss knowledge base — fixed, local
+   answers, no external lookups, no API key. ---- */
+const FITNESS_KB=[
+  {
+    words:['tip for weight loss','tips for weight loss','how to lose weight','lose weight faster','weight loss tip'],
+    answer:"A few things that help most: keep a small, consistent calorie deficit rather than a drastic one; prioritize protein and vegetables so you stay full; move daily — even short sessions add up; sleep 7–9 hours since poor sleep affects hunger hormones; and track progress weekly rather than daily, since day-to-day weight naturally fluctuates."
+  },
+  {
+    words:['how many calories should i eat','calorie deficit','how much should i eat'],
+    answer:"A common, sustainable approach is a deficit of about 300–500 calories below your maintenance level, which tends to produce roughly 0.25–0.5 kg of fat loss per week. Exact maintenance calories depend on your age, weight, height and activity level, so this is a general guide, not personal medical advice — a doctor or dietitian can give you an exact number."
+  },
+  {
+    words:['is it normal to feel sore','muscle soreness','sore after workout','why am i sore'],
+    answer:"Yes, mild soreness 1–2 days after a new or harder workout (called DOMS) is normal, especially when you change your routine. Light movement, hydration, and stretching usually help. Sharp pain, swelling, or soreness that doesn't improve after a few days is different — ease off and consider checking with a doctor."
+  },
+  {
+    words:['how often should i workout','how many days a week should i exercise','workout frequency'],
+    answer:"For general weight loss, most people do well with 4–6 sessions a week, mixing workout days with at least 1–2 rest or light-activity days. Consistency matters more than frequency — a realistic schedule you can stick to beats an intense one you quit after a week."
+  },
+  {
+    words:['best time to workout','morning or evening workout','when should i exercise'],
+    answer:"The best time is whichever one you can do consistently — research shows the difference between morning and evening workouts is small for most goals. Some people have more energy in the morning, others perform better later in the day. Pick a time that fits your schedule and stick with it."
+  },
+  {
+    words:['warm up','should i stretch before'],
+    answer:"Yes — a short 5-minute warm-up (light cardio plus dynamic movements like leg swings or arm circles) helps raise your heart rate and loosen muscles before a workout, which can reduce injury risk. Save static, held stretches for after your workout instead."
+  },
+  {
+    words:['drink water','how much water should i drink','hydration'],
+    answer:"A common general guideline is around 2–3 liters of water a day, more if you're sweating heavily during workouts or in hot weather. Your exact needs depend on your body size, activity level and climate."
+  },
+  {
+    words:['plateau','stopped losing weight','weight loss stalled'],
+    answer:"Weight loss plateaus are very common and usually mean your body has adapted to your current routine. A few options: reassess your calorie intake (it's easy to underestimate portions over time), add or vary your activity, prioritize sleep and stress management, and give it 2–3 weeks before changing things — short-term plateaus often resolve on their own."
+  },
+  {
+    words:['diet plan','what should i eat','best diet for weight loss','meal plan'],
+    answer:"There's no single 'best' diet — what matters most is a moderate calorie deficit you can sustain, enough protein to protect muscle, mostly whole foods, and a pattern you can keep up long-term. For a personalized plan, especially if you have health conditions, it's worth speaking with a registered dietitian."
+  },
+  {
+    words:['cardio or strength training','strength training vs cardio','weights or cardio for weight loss'],
+    answer:"Both help, in different ways: cardio burns calories during the session, while strength training builds and preserves muscle, which supports your metabolism over time. A combination of both — like the strength-and-cardio mix in this app's plans — tends to work best for overall weight loss and body composition."
+  },
+  {
+    words:['rest day','do i need a rest day','recovery day'],
+    answer:"Yes, rest days matter — they let muscles repair and reduce injury and burnout risk. Most people benefit from at least 1–2 lighter or fully rested days per week, even during an active program."
+  },
+  {
+    words:['lose belly fat','reduce belly fat','flatten my stomach'],
+    answer:"You can't target fat loss to one area through exercise alone — visible ab definition mainly comes from overall body fat reduction through a calorie deficit, combined with consistent core and full-body training to build the muscle underneath."
+  },
+  {
+    words:['how long to see results','when will i see results','how fast will i lose weight'],
+    answer:"Most people start noticing energy and strength improvements within 1–2 weeks, and visible body changes typically take 4–8 weeks of consistency, depending on your starting point and how closely you stick to your routine and nutrition."
+  }
+];
+function tryAnswerFromKnowledgeBase(q){
+  for(const entry of FITNESS_KB){
+    if(has(q,entry.words))return entry.answer;
+  }
+  if(has(q,['hi','hello','hey','namaste'])&&q.length<20){
+    return "Hey! Ask me about your saved progress in this app, or any general weight-loss and fitness question.";
+  }
+  if(has(q,['thank','thanks'])){
+    return "You're welcome! Let me know if you have more questions about your progress or fitness in general.";
+  }
+  return null;
+}
+</script>
+</body>
+</html>
